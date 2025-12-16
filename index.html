@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ghostlight.tech — tools for the people who make shows happen</title>
+    <meta name="description" content="Ghostlight builds infrastructure for theatre and live events. The Guild for creative teams. The Board for crew dispatch.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0c;
+            --surface: #111118;
+            --ghost: #ffaa00;
+            --ghost-dim: #cc8800;
+            --ghost-fade: rgba(255, 170, 0, 0.1);
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --chrome: #e0e0e8;
+            --steel: #8a8a9c;
+            --rust: #3d3d4a;
+            --dark-rust: #2a2a32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--void);
+            color: var(--chrome);
+            min-height: 100vh;
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* Scanlines */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.08) 2px,
+                rgba(0, 0, 0, 0.08) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Grid */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 157, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 157, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header / Logo */
+        header {
+            margin-bottom: 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: lowercase;
+        }
+
+        .logo-ghost {
+            color: var(--chrome);
+        }
+
+        .logo-light {
+            color: var(--steel);
+        }
+
+        .logo-light .i {
+            position: relative;
+            color: var(--ghost);
+            text-shadow: 
+                0 0 10px var(--ghost),
+                0 0 20px var(--ghost),
+                0 0 40px var(--ghost-dim);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .logo-light .i .i-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 170, 0, 0.3) 0%, rgba(255, 170, 0, 0.1) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: radiate 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes radiate {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px var(--ghost),
+                    0 0 20px var(--ghost),
+                    0 0 40px var(--ghost-dim);
+            }
+            50% {
+                text-shadow: 
+                    0 0 15px var(--ghost),
+                    0 0 30px var(--ghost),
+                    0 0 50px var(--ghost-dim);
+            }
+        }
+
+        /* Products */
+        .products {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .product {
+            background: var(--surface);
+            border: 1px solid var(--dark-rust);
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .product:hover {
+            border-color: var(--rust);
+        }
+
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .product.guild::before {
+            background: #f0a500;
+            box-shadow: 0 0 10px #f0a500;
+        }
+
+        .product.board::before {
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .product h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+        }
+
+        .product.guild h2 {
+            color: #f0a500;
+        }
+
+        .product.board h2 {
+            color: var(--neon-blue);
+        }
+
+        .product .status {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 2px;
+        }
+
+        .product.guild .status {
+            color: #f0a500;
+            background: rgba(240, 165, 0, 0.1);
+            border: 1px solid rgba(240, 165, 0, 0.3);
+        }
+
+        .product.board .status {
+            color: var(--neon-blue);
+            background: rgba(5, 217, 232, 0.1);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+        }
+
+        .product p {
+            color: var(--steel);
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .product .problem {
+            color: var(--chrome);
+            font-style: italic;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 2px solid var(--rust);
+        }
+
+        .product .features {
+            list-style: none;
+            margin: 0 0 20px 0;
+            padding: 0;
+        }
+
+        .product .features li {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--steel);
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .product .features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--rust);
+        }
+
+        .product.guild .features li::before {
+            color: #f0a500;
+        }
+
+        .product.board .features li::before {
+            color: var(--neon-blue);
+        }
+
+        .product-link {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .product.guild .product-link {
+            color: #f0a500;
+        }
+
+        .product.guild .product-link:hover {
+            text-shadow: 0 0 10px #f0a500;
+        }
+
+        .product.board .product-link {
+            color: var(--neon-blue);
+        }
+
+        .product.board .product-link:hover {
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .changelog {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--dark-rust);
+        }
+
+        .changelog-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--rust);
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .changelog-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .changelog-list li {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--steel);
+            padding: 4px 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .changelog-list .date {
+            color: var(--rust);
+            min-width: 50px;
+        }
+
+        .commit-count {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--rust);
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--dark-rust);
+        }
+
+        /* About / Developer */
+        .developer {
+            background: var(--surface);
+            border: 1px solid var(--dark-rust);
+            padding: 32px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .developer-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--rust);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .developer-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--chrome);
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .developer-bio p {
+            color: var(--steel);
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 540px;
+            margin: 0 auto 16px auto;
+            text-align: left;
+        }
+
+        .developer-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Typewriter effect */
+        .developer-bio .typewriter {
+            overflow: hidden;
+            white-space: normal;
+            opacity: 0;
+            animation: fadeTypeIn 0.5s ease-out forwards;
+        }
+
+        .developer-bio .typewriter[data-delay="0"] {
+            animation-delay: 0.3s;
+        }
+
+        .developer-bio .typewriter[data-delay="1"] {
+            animation-delay: 1.5s;
+        }
+
+        .developer-bio .typewriter[data-delay="2"] {
+            animation-delay: 3s;
+        }
+
+        @keyframes fadeTypeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Reply form */
+        .reply-section {
+            margin-bottom: 60px;
+        }
+
+        .reply-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--dark-rust);
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reply-form .prompt {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--ghost);
+            font-size: 1rem;
+        }
+
+        .reply-form .reply-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--chrome);
+            caret-color: var(--ghost);
+        }
+
+        .reply-form .reply-input::placeholder {
+            color: var(--rust);
+        }
+
+        .reply-form .reply-submit {
+            background: transparent;
+            border: none;
+            color: var(--ghost);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: all 0.2s ease;
+        }
+
+        .reply-form .reply-submit:hover {
+            text-shadow: 0 0 10px var(--ghost);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding-top: 32px;
+            border-top: 1px solid var(--dark-rust);
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--rust);
+            letter-spacing: 0.1em;
+        }
+
+        footer .location {
+            margin-bottom: 12px;
+        }
+
+        footer nav {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        footer a {
+            color: var(--steel);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--ghost);
+        }
+
+        /* Mobile */
+        @media (max-width: 540px) {
+            .container {
+                padding: 60px 20px;
+            }
+
+            .logo-text {
+                font-size: 1.6rem;
+            }
+
+            .product {
+                padding: 24px;
+            }
+
+            .product-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .links a {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-text">
+                    <span class="logo-ghost">ghost</span><span class="logo-light">l<span class="i"><span class="i-glow"></span>i</span>ght</span>
+                </span>
+            </div>
+        </header>
+
+        <section class="products">
+            <div class="product guild">
+                <div class="product-header">
+                    <h2>The Guild</h2>
+                    <span class="status">alpha</span>
+                </div>
+                <p class="problem">Casting directors drowning in email submissions, spreadsheet shortlists, and 2am callback scheduling.</p>
+                <ul class="features">
+                    <li>Collect submissions online</li>
+                    <li>Review, rate & shortlist with your team</li>
+                    <li>Schedule callbacks with confirm/decline tracking</li>
+                    <li>Early access — testing with Vancouver companies</li>
+                </ul>
+                <div class="changelog">
+                    <p class="changelog-label">// recent commits</p>
+                    <ul class="changelog-list">
+                        <li><span class="date">Dec 12</span> Session management CRUD, production settings</li>
+                        <li><span class="date">Dec 10</span> About page redesign, email verification</li>
+                        <li><span class="date">Dec 9</span> Multi-guild support, production-level access control</li>
+                        <li><span class="date">Nov 26</span> Profile-first audition flow, filtering</li>
+                        <li><span class="date">Nov 11</span> Google Drive-style file manager</li>
+                    </ul>
+                    <p class="commit-count">180+ commits since Sept 2024</p>
+                </div>
+                <a href="https://www.the-guild.app/about" class="product-link" target="_blank">Learn more →</a>
+            </div>
+
+            <div class="product board">
+                <div class="product-header">
+                    <h2>The Board</h2>
+                    <span class="status">production</span>
+                </div>
+                <p class="problem">Dispatchers juggling 6 tools—Excel, SMS apps, shared drives—to fill 80 shows a month.</p>
+                <ul class="features">
+                    <li>Bulk SMS dispatch with seniority enforcement</li>
+                    <li>Skill matching across 38,000+ records</li>
+                    <li>Conflict detection & audit trail</li>
+                    <li>16 months in production at IATSE Local 118</li>
+                </ul>
+                <div class="changelog">
+                    <p class="changelog-label">// recent commits</p>
+                    <ul class="changelog-list">
+                        <li><span class="date">Dec 12</span> Security update (CVE patches)</li>
+                        <li><span class="date">Dec 11</span> CallSteward sync with progress tracking</li>
+                        <li><span class="date">Dec 6</span> Job search improvements, maintenance mode</li>
+                        <li><span class="date">Nov 15</span> Worker Portal Phase 1 — bidding system</li>
+                        <li><span class="date">Nov 8</span> Unified auth, landing page redesign</li>
+                    </ul>
+                    <p class="commit-count">130+ commits since Oct 2025 · 178 API routes · 56 tables</p>
+                </div>
+                <a href="https://the-board.app/landing" class="product-link" target="_blank">Learn more →</a>
+            </div>
+        </section>
+
+        <section class="developer">
+            <p class="developer-label">// founder</p>
+            <h3 class="developer-name">Vincent Keats</h3>
+            <div class="developer-bio">
+                <p class="typewriter" data-delay="0">Vincent Keats is the founder of Ghostlight, building infrastructure for theatre and live events.</p>
+                <p class="typewriter" data-delay="1">Ghostlight started in 2024 when Vincent—a working dispatcher at IATSE Local 118—built The Board to automate his own job. What began as a personal tool now manages 3,400+ workers across hundreds of shows. The Guild followed, bringing the same thinking to casting and production management.</p>
+                <p class="typewriter" data-delay="2">Vincent studied theatre and event management at CCPA, then learned to code through Harvard's CS50 and the #100Devs bootcamp while dispatching full-time. He still acts and performs in the same theatres his software supports.</p>
+            </div>
+        </section>
+
+        <section class="reply-section">
+            <form class="reply-form" action="https://formspree.io/f/xwpkvqvn" method="POST">
+                <div class="form-row">
+                    <span class="prompt">>&nbsp;</span>
+                    <input type="email" name="email" class="reply-input" placeholder="your@email.com" required autocomplete="email">
+                </div>
+                <div class="form-row">
+                    <span class="prompt">>&nbsp;</span>
+                    <input type="text" name="message" class="reply-input" placeholder="Say hello..." required autocomplete="off">
+                    <button type="submit" class="reply-submit">↵</button>
+                </div>
+            </form>
+        </section>
+
+        <footer>
+            <p class="location">Vancouver, BC</p>
+            <nav>
+                <a href="https://github.com/Vkeats" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/vkeats" target="_blank">LinkedIn</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>
