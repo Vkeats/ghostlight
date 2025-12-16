@@ -1,3 +1,23 @@
+// Random glitch effect on .tech
+(function() {
+    const tech = document.querySelector('.logo__text--tech');
+    if (!tech) return;
+
+    function triggerGlitch() {
+        tech.classList.add('glitch');
+        tech.addEventListener('animationend', () => {
+            tech.classList.remove('glitch');
+        }, { once: true });
+
+        // Random delay between 3-8 seconds
+        const nextDelay = 3000 + Math.random() * 5000;
+        setTimeout(triggerGlitch, nextDelay);
+    }
+
+    // Start after initial random delay
+    setTimeout(triggerGlitch, 2000 + Math.random() * 3000);
+})();
+
 document.querySelector('.contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const form = e.target;
