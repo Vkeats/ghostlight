@@ -110,42 +110,12 @@
         }
 
         .logo-light {
-            color: var(--steel);
-        }
-
-        .logo-light .i {
-            position: relative;
             color: var(--ghost);
-            text-shadow: 
+            text-shadow:
                 0 0 10px var(--ghost),
                 0 0 20px var(--ghost),
                 0 0 40px var(--ghost-dim);
             animation: pulse 3s ease-in-out infinite;
-        }
-
-        .logo-light .i .i-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(255, 170, 0, 0.3) 0%, rgba(255, 170, 0, 0.1) 40%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: radiate 4s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes radiate {
-            0%, 100% {
-                opacity: 0.6;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.1);
-            }
         }
 
         @keyframes pulse {
@@ -365,12 +335,50 @@
             padding: 32px;
             margin-bottom: 60px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-title {
+            height: 1.4em;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .journey-roles {
+            display: flex;
+            flex-direction: column;
+            animation: journeyScroll 8s steps(7) infinite;
+        }
+
+        .journey-roles span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ghost);
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+            height: 1.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes journeyScroll {
+            0%, 10% { transform: translateY(0); }
+            14.28%, 24.28% { transform: translateY(-1.4em); }
+            28.56%, 38.56% { transform: translateY(-2.8em); }
+            42.84%, 52.84% { transform: translateY(-4.2em); }
+            57.12%, 67.12% { transform: translateY(-5.6em); }
+            71.40%, 81.40% { transform: translateY(-7em); }
+            85.68%, 100% { transform: translateY(-8.4em); }
         }
 
         .developer-label {
             font-family: 'Share Tech Mono', monospace;
             font-size: 0.7rem;
-            color: var(--rust);
+            color: var(--chrome);
             letter-spacing: 0.2em;
             text-transform: uppercase;
             margin-bottom: 16px;
@@ -380,9 +388,10 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
             font-weight: 500;
-            color: var(--chrome);
+            color: var(--ghost);
             margin-bottom: 20px;
             letter-spacing: 0.02em;
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
         }
 
         .developer-bio p {
@@ -558,7 +567,7 @@
         <header>
             <div class="logo">
                 <span class="logo-text">
-                    <span class="logo-ghost">ghost</span><span class="logo-light">l<span class="i"><span class="i-glow"></span>i</span>ght</span>
+                    <span class="logo-ghost">ghost</span><span class="logo-light">light</span>
                 </span>
             </div>
         </header>
@@ -618,7 +627,7 @@
         </section>
 
         <section class="developer">
-            <p class="developer-label">// founder</p>
+            <p class="developer-label">founder · developer</p>
             <h3 class="developer-name">Vincent Keats</h3>
             <div class="developer-bio">
                 <p class="typewriter" data-delay="0">Vincent Keats is the founder of Ghostlight, building infrastructure for theatre and live events.</p>
