@@ -161,6 +161,15 @@ header {
 }
 
 /* Products */
+.section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
 .products {
     display: flex;
     flex-direction: column;
