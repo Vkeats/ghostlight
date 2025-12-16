@@ -526,7 +526,7 @@ footer {
     .container { padding: 0 20px 60px; }
     .logo__text { font-size: 1.6rem; }
     .card { padding: 24px; }
-    .product__header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .product__status { position: absolute; top: 24px; right: 24px; }
     .about { flex-direction: column; align-items: center; text-align: center; }
     .about__content { text-align: center; }
 }
