@@ -266,6 +266,14 @@ header {
     color: var(--product-color);
 }
 
+.product__stack {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--steel);
+    margin: 16px 0 20px;
+    letter-spacing: 0.02em;
+}
+
 .product__link {
     font-family: var(--font-mono);
     font-size: 0.85rem;
