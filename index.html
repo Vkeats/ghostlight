@@ -18,6 +18,7 @@
                 <span class="logo__text--ghost">ghost</span><span class="logo__text--light">light</span><span class="logo__text--tech">.tech</span>
             </span>
         </h1>
+        <p class="tagline">Infrastructure for live theatre.</p>
     </header>
 
     <main class="container">
@@ -25,7 +26,10 @@
             <h2 class="section-label" id="products-label">// current projects</h2>
             <article class="card product product--guild">
                 <div class="product__header">
-                    <h2 class="product__title">The Guild</h2>
+                    <div class="product__title-row">
+                        <img src="docs/the-guild.svg" alt="" class="product__logo" width="32" height="32">
+                        <h2 class="product__title">The Guild</h2>
+                    </div>
                     <span class="product__status">alpha</span>
                 </div>
                 <p class="product__problem">Casting directors drowning in email submissions, spreadsheet shortlists, and 2am callback scheduling.</p>
@@ -36,13 +40,13 @@
                     <li>Early access — testing with Vancouver companies</li>
                 </ul>
                 <aside class="changelog">
-                    <h3 class="changelog__label">// recent commits</h3>
+                    <h3 class="changelog__label">// recent updates</h3>
                     <ul class="changelog__list">
-                        <li><time class="changelog__date" datetime="2024-12-12">Dec 12</time> Session management CRUD, production settings</li>
-                        <li><time class="changelog__date" datetime="2024-12-10">Dec 10</time> About page redesign, email verification</li>
-                        <li><time class="changelog__date" datetime="2024-12-09">Dec 9</time> Multi-guild support, production-level access control</li>
-                        <li><time class="changelog__date" datetime="2024-11-26">Nov 26</time> Profile-first audition flow, filtering</li>
-                        <li><time class="changelog__date" datetime="2024-11-11">Nov 11</time> Google Drive-style file manager</li>
+                        <li>Session management CRUD, production settings</li>
+                        <li>About page redesign, email verification</li>
+                        <li>Multi-guild support, production-level access control</li>
+                        <li>Profile-first audition flow, filtering</li>
+                        <li>Google Drive-style file manager</li>
                     </ul>
                     <p class="changelog__summary">180+ commits since Sept 2024</p>
                 </aside>
@@ -52,7 +56,10 @@
 
             <article class="card product product--board">
                 <div class="product__header">
-                    <h2 class="product__title">The Board</h2>
+                    <div class="product__title-row">
+                        <img src="docs/the-board.svg" alt="" class="product__logo" width="32" height="32">
+                        <h2 class="product__title">The Board</h2>
+                    </div>
                     <span class="product__status">production</span>
                 </div>
                 <p class="product__problem">Dispatchers juggling 6 tools—Excel, SMS apps, shared drives—to fill 80 shows a month.</p>
@@ -60,18 +67,18 @@
                     <li>Bulk SMS dispatch with seniority enforcement</li>
                     <li>Skill matching across 38,000+ records</li>
                     <li>Conflict detection & audit trail</li>
-                    <li>16 months in production at IATSE Local 118</li>
+                    <li>In production at IATSE Local 118 since June 2024</li>
                 </ul>
                 <aside class="changelog">
-                    <h3 class="changelog__label">// recent commits</h3>
+                    <h3 class="changelog__label">// recent updates</h3>
                     <ul class="changelog__list">
-                        <li><time class="changelog__date" datetime="2024-12-12">Dec 12</time> Security update (CVE patches)</li>
-                        <li><time class="changelog__date" datetime="2024-12-11">Dec 11</time> CallSteward sync with progress tracking</li>
-                        <li><time class="changelog__date" datetime="2024-12-06">Dec 6</time> Job search improvements, maintenance mode</li>
-                        <li><time class="changelog__date" datetime="2024-11-15">Nov 15</time> Worker Portal Phase 1 — bidding system</li>
-                        <li><time class="changelog__date" datetime="2024-11-08">Nov 8</time> Unified auth, landing page redesign</li>
+                        <li>Security update (CVE patches)</li>
+                        <li>CallSteward sync with progress tracking</li>
+                        <li>Job search improvements, maintenance mode</li>
+                        <li>Worker Portal Phase 1 — bidding system</li>
+                        <li>Unified auth, landing page redesign</li>
                     </ul>
-                    <p class="changelog__summary">130+ commits since Oct 2023 · 178 API routes · 56 tables</p>
+                    <p class="changelog__summary">178 API routes · 56 tables</p>
                 </aside>
                 <p class="product__stack">Next.js · TypeScript · SQLite · Twilio · WebSocket · Tailwind</p>
                 <a href="https://the-board.app/landing" class="product__link" target="_blank" rel="noopener">Learn more →</a>
@@ -79,12 +86,15 @@
         </section>
 
         <section class="card about">
-            <p class="about__label">founder · developer</p>
-            <h2 class="about__name">Vincent Keats</h2>
-            <div class="about__bio">
-                <p class="typewriter" data-delay="0">Vincent Keats is a developer and actor based in Vancouver, building software under the Ghostlight name.</p>
-                <p class="typewriter" data-delay="1">Ghostlight started in 2024 when Vincent—a working dispatcher at IATSE Local 118—built The Board to automate his own job. What began as a personal tool now manages 3,400+ workers across hundreds of shows. The Guild followed, bringing the same thinking to casting and production management.</p>
-                <p class="typewriter" data-delay="2">Vincent studied theatre at CCPA, then learned to code through Harvard's CS50 and the #100Devs bootcamp while dispatching full-time. He still performs in the same theatres his software supports—and is always looking for the next problem to solve.</p>
+            <img src="docs/Vincent Keats Headshot 1-2024.jpg" alt="Vincent Keats" class="about__headshot" width="80" height="100">
+            <div class="about__content">
+                <p class="about__label">founder · developer</p>
+                <h2 class="about__name">Vincent Keats</h2>
+                <div class="about__bio">
+                    <p class="typewriter" data-delay="0">Vincent Keats is a developer and actor based in Vancouver, building software under the Ghostlight name.</p>
+                    <p class="typewriter" data-delay="1">Ghostlight started in 2024 when Vincent—a working dispatcher at IATSE Local 118—built The Board to automate his own job, cutting dispatch time from 45 minutes to 5. What began as a personal tool now manages 3,400+ workers across hundreds of shows. The Guild followed, bringing the same thinking to casting and creative teams.</p>
+                    <p class="typewriter" data-delay="2">Vincent studied theatre at CCPA, then learned to code through Harvard's CS50 and the #100Devs bootcamp while dispatching full-time. He still performs in the same theatres his software supports—and is always looking for the next problem to solve.</p>
+                </div>
             </div>
         </section>
 

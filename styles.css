@@ -160,6 +160,14 @@ header {
     50% { text-shadow: 0 0 15px var(--ghost), 0 0 30px var(--ghost), 0 0 50px var(--ghost-dim); }
 }
 
+.tagline {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--steel);
+    letter-spacing: 0.05em;
+    margin-top: 16px;
+}
+
 /* Products */
 .section-label {
     font-family: var(--font-mono);
@@ -214,6 +222,16 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+}
+
+.product__title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.product__logo {
+    flex-shrink: 0;
 }
 
 .product__title {
@@ -309,13 +327,6 @@ header {
     font-size: 0.75rem;
     color: var(--steel);
     padding: 4px 0;
-    display: flex;
-    gap: 12px;
-}
-
-.changelog__date {
-    color: var(--rust);
-    min-width: 50px;
 }
 
 .changelog__summary {
@@ -328,9 +339,26 @@ header {
 
 /* About */
 .about {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
     margin-bottom: 60px;
-    text-align: center;
     overflow: hidden;
+}
+
+.about__headshot {
+    width: 80px;
+    height: 100px;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--dark-rust);
+    box-shadow: 0 2px 8px rgba(255, 170, 0, 0.3);
+}
+
+.about__content {
+    flex: 1;
+    text-align: left;
 }
 
 .about__label {
@@ -338,15 +366,15 @@ header {
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .about__name {
     font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: var(--ghost);
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     letter-spacing: 0.02em;
     text-shadow: 0 0 10px var(--ghost-glow);
 }
@@ -354,11 +382,9 @@ header {
 .about__bio p {
     color: var(--steel);
     font-weight: 300;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    max-width: 540px;
-    margin: 0 auto 16px;
-    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 12px;
 }
 
 .about__bio p:last-child { margin-bottom: 0; }
@@ -491,4 +517,6 @@ footer {
     .logo__text { font-size: 1.6rem; }
     .card { padding: 24px; }
     .product__header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .about { flex-direction: column; align-items: center; text-align: center; }
+    .about__content { text-align: center; }
 }
