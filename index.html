@@ -90,6 +90,16 @@
             position: relative;
         }
 
+        .section-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--rust);
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+            margin-bottom: 24px;
+        }
+
         .logo {
             display: inline-flex;
             align-items: center;
@@ -117,6 +127,13 @@
                 0 0 20px var(--ghost),
                 0 0 40px var(--ghost-dim);
             animation: pulse 3s ease-in-out infinite;
+        }
+
+        .logo-tech {
+            color: var(--rust);
+            font-size: 0.6em;
+            font-weight: 400;
+            vertical-align: baseline;
         }
 
         @keyframes pulse {
@@ -568,7 +585,7 @@
         <header>
             <div class="logo">
                 <span class="logo-text">
-                    <span class="logo-ghost">ghost</span><span class="logo-light">light</span>
+                    <span class="logo-ghost">ghost</span><span class="logo-light">light</span><span class="logo-tech">.tech</span>
                 </span>
             </div>
         </header>
