@@ -492,6 +492,12 @@ footer {
 
 .footer__nav a:hover { color: var(--ghost); }
 
+.footer__copyright {
+    margin-top: 16px;
+    font-size: 0.65rem;
+    color: var(--dark-rust);
+}
+
 /* Focus styles */
 .contact-form__input:focus { border-bottom: 1px solid var(--ghost); }
 
