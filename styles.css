@@ -409,9 +409,9 @@ header {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-width: 400px;
-    margin: 0 auto 60px;
-    padding: 16px 20px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--dark-rust);
     font-family: var(--font-mono);
 }
 
@@ -446,11 +446,12 @@ header {
     font-size: 1.1rem;
     cursor: pointer;
     padding: 4px 8px;
-    transition: text-shadow 0.2s ease;
+    transition: text-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .contact-form__submit:hover {
     text-shadow: 0 0 10px var(--ghost);
+    transform: scale(1.15);
 }
 
 .contact-form__status {
@@ -466,7 +467,7 @@ header {
 /* Footer */
 footer {
     max-width: 720px;
-    margin: 80px auto 0;
+    margin: 48px auto 0;
     padding: 32px 24px 0;
     border-top: 1px solid var(--dark-rust);
     text-align: center;
@@ -495,7 +496,7 @@ footer {
 .footer__copyright {
     margin-top: 16px;
     font-size: 0.65rem;
-    color: var(--dark-rust);
+    color: var(--steel);
 }
 
 /* Focus styles */

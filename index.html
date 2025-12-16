@@ -47,7 +47,7 @@
                         <img src="assets/the-guild.svg" alt="" class="product__logo" width="32" height="32">
                         <h2 class="product__title">The Guild</h2>
                     </div>
-                    <span class="product__status">alpha</span>
+                    <span class="product__status">preview</span>
                 </div>
                 <p class="product__problem">Casting directors drowning in email submissions, spreadsheet shortlists, and 2am callback scheduling.</p>
                 <ul class="product__features">
@@ -112,21 +112,20 @@
                     <p class="typewriter" data-delay="1">Ghostlight started in 2024 when Vincent—a working dispatcher at IATSE Local 118—built The Board to automate his own job, cutting dispatch time from 45 minutes to 5. What began as a personal tool now manages 3,400+ workers across hundreds of shows. The Guild followed, bringing the same thinking to casting and creative teams.</p>
                     <p class="typewriter" data-delay="2">Vincent studied theatre at CCPA, then learned to code through Harvard's CS50 and the #100Devs bootcamp while dispatching full-time. He still performs in the same theatres his software supports—and is always looking for the next problem to solve.</p>
                 </div>
+                <form class="contact-form" action="https://formspree.io/f/xblnenyb" method="POST" aria-label="Contact form">
+                    <div class="contact-form__row">
+                        <span class="contact-form__prompt" aria-hidden="true">*&nbsp;</span>
+                        <input type="email" name="email" class="contact-form__input" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+                    </div>
+                    <div class="contact-form__row">
+                        <span class="contact-form__prompt" aria-hidden="true">&gt;&nbsp;</span>
+                        <input type="text" name="message" class="contact-form__input" placeholder="Say hello..." required autocomplete="off" aria-label="Message">
+                        <button type="submit" class="contact-form__submit" aria-label="Send message">↵</button>
+                    </div>
+                    <div class="contact-form__status" role="status" aria-live="polite"></div>
+                </form>
             </div>
         </section>
-
-        <form class="card contact-form" action="https://formspree.io/f/xblnenyb" method="POST" aria-label="Contact form">
-            <div class="contact-form__row">
-                <span class="contact-form__prompt" aria-hidden="true">&gt;&nbsp;</span>
-                <input type="email" name="email" class="contact-form__input" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
-            </div>
-            <div class="contact-form__row">
-                <span class="contact-form__prompt" aria-hidden="true">&gt;&nbsp;</span>
-                <input type="text" name="message" class="contact-form__input" placeholder="Say hello..." required autocomplete="off" aria-label="Message">
-                <button type="submit" class="contact-form__submit" aria-label="Send message">↵</button>
-            </div>
-            <div class="contact-form__status" role="status" aria-live="polite"></div>
-        </form>
     </main>
 
     <footer>
