@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ghostlight.tech — Live theatre infrastructure, Vancouver</title>
-    <meta name="description" content="Ghostlight is the software studio of Vincent Keats. Currently building tools for theatre and live events.">
+    <title>ghostlight.tech — The operating system for live production</title>
+    <meta name="description" content="The operating system for live production. Modular software for casting, crew dispatch, and production management.">
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ghostlight.tech">
-    <meta property="og:title" content="ghostlight.tech — Live theatre infrastructure, Vancouver">
-    <meta property="og:description" content="Software studio of Vincent Keats. Building The Guild (casting) and The Board (dispatch) for Vancouver's theatre community.">
+    <meta property="og:title" content="ghostlight.tech — The operating system for live production">
+    <meta property="og:description" content="The operating system for live production. Modular software for casting, crew dispatch, and production management.">
     <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ghostlight.tech — Live theatre infrastructure, Vancouver">
-    <meta name="twitter:description" content="Software studio of Vincent Keats. Building The Guild (casting) and The Board (dispatch) for Vancouver's theatre community.">
+    <meta name="twitter:title" content="ghostlight.tech — The operating system for live production">
+    <meta name="twitter:description" content="The operating system for live production. Modular software for casting, crew dispatch, and production management.">
     <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
 
     <link rel="canonical" href="https://ghostlight.tech">
@@ -35,12 +35,12 @@
                 <span class="logo__text--ghost">ghost</span><span class="logo__text--light">light</span><span class="logo__text--tech">.tech</span>
             </span>
         </h1>
-        <p class="tagline">Infrastructure for live theatre.</p>
+        <p class="tagline">The operating system for live production.</p>
     </header>
 
     <main class="container">
         <section class="products" aria-labelledby="products-label">
-            <h2 class="section-label" id="products-label">// products</h2>
+            <h2 class="section-label" id="products-label">// modules</h2>
             <article class="card product product--guild">
                 <div class="product__header">
                     <div class="product__title-row">
@@ -49,15 +49,15 @@
                     </div>
                     <span class="product__status">preview</span>
                 </div>
-                <p class="product__problem">Casting directors drowning in email submissions, spreadsheet shortlists, and 2am callback scheduling.</p>
+                <p class="product__problem">Pre-production: streamlined auditions, collaborative shortlisting, and callback scheduling in one place.</p>
                 <ul class="product__features">
                     <li>Collect submissions online</li>
                     <li>Review, rate & shortlist with your team</li>
                     <li>Schedule callbacks with confirm/decline tracking</li>
                     <li>Early access — testing with Vancouver companies</li>
                 </ul>
-                <aside class="changelog">
-                    <h3 class="changelog__label">// recent updates</h3>
+                <details class="changelog">
+                    <summary class="changelog__label">changelog</summary>
                     <ul class="changelog__list">
                         <li>Session management CRUD, production settings</li>
                         <li>About page redesign, email verification</li>
@@ -66,7 +66,7 @@
                         <li>Google Drive-style file manager</li>
                     </ul>
                     <p class="changelog__summary">180+ commits since Sept 2024</p>
-                </aside>
+                </details>
                 <p class="product__stack">Next.js · TypeScript · PostgreSQL · Drizzle · Stripe · Vercel</p>
                 <a href="https://www.the-guild.app/about" class="product__link" target="_blank" rel="noopener">Learn more →</a>
             </article>
@@ -79,15 +79,15 @@
                     </div>
                     <span class="product__status">production</span>
                 </div>
-                <p class="product__problem">Dispatchers juggling 6 tools—Excel, SMS apps, shared drives—to fill 80 shows a month.</p>
+                <p class="product__problem">Operations: crew dispatch, skill matching, and seniority enforcement — from load-in to strike.</p>
                 <ul class="product__features">
                     <li>Bulk SMS dispatch with seniority enforcement</li>
                     <li>Skill matching across 38,000+ records</li>
                     <li>Conflict detection & audit trail</li>
                     <li>In production at IATSE Local 118 since June 2024</li>
                 </ul>
-                <aside class="changelog">
-                    <h3 class="changelog__label">// recent updates</h3>
+                <details class="changelog">
+                    <summary class="changelog__label">changelog</summary>
                     <ul class="changelog__list">
                         <li>Security update (CVE patches)</li>
                         <li>CallSteward sync with progress tracking</li>
@@ -96,7 +96,7 @@
                         <li>Unified auth, landing page redesign</li>
                     </ul>
                     <p class="changelog__summary">178 API routes · 56 tables</p>
-                </aside>
+                </details>
                 <p class="product__stack">Next.js · TypeScript · SQLite · Twilio · WebSocket · Tailwind</p>
                 <a href="https://the-board.app/landing" class="product__link" target="_blank" rel="noopener">Learn more →</a>
             </article>
@@ -109,8 +109,7 @@
                 <h2 class="about__name">Vincent Keats</h2>
                 <div class="about__bio">
                     <p class="typewriter" data-delay="0">Software engineer and actor based in Vancouver.</p>
-                    <p class="typewriter" data-delay="1">Ghostlight started in 2024 while working as a dispatcher at IATSE Local 118. The Board was built to automate the job, cutting dispatch time from 45 minutes to 5. What began as a personal tool now manages 3,400+ workers across hundreds of shows. The Guild followed, bringing the same thinking to casting and creative teams.</p>
-                    <p class="typewriter" data-delay="2">Studied theatre at CCPA, then learned to code through Harvard's CS50 and #100Devs while dispatching full-time. Still performs in the same theatres the software supports.</p>
+                    <p class="typewriter" data-delay="1">Ghostlight started in 2024 while dispatching at IATSE Local 118. Built The Board to automate crew dispatch — now managing 3,400+ workers across hundreds of shows. The Guild followed, applying the same approach to casting and creative teams.</p>
                 </div>
                 <form class="contact-form" action="https://formspree.io/f/xblnenyb" method="POST" aria-label="Contact form">
                     <div class="contact-form__row">
