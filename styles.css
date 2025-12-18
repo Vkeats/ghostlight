@@ -386,20 +386,66 @@ header {
     --product-color: var(--guild-gold);
     --product-fade: var(--guild-gold-fade);
     --product-border: var(--guild-gold-border);
+    --border-gradient: linear-gradient(90deg, var(--guild-gold), var(--neon-blue), var(--guild-gold));
 }
 
 .product--board {
     --product-color: var(--neon-blue);
     --product-fade: var(--neon-blue-fade);
     --product-border: var(--neon-blue-border);
+    --border-gradient: linear-gradient(90deg, var(--neon-blue), var(--guild-gold), var(--neon-blue));
 }
 
 .product {
     position: relative;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
-.product:hover { border-color: var(--rust); }
+.product:hover {
+    border-color: var(--product-color);
+    box-shadow:
+        0 0 1px var(--product-color),
+        0 0 2px var(--product-color);
+}
+
+.product::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    left: 2px;
+    border: 1px solid transparent;
+    border-left: none;
+    pointer-events: none;
+    background: var(--border-gradient) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: 300% 100%;
+    background-position: 0% 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.product:hover::after {
+    opacity: 1;
+    animation: borderTrace 0.6s ease-out;
+}
+
+@keyframes borderTrace {
+    0% {
+        background-position: 0% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
 
 .product::before {
     content: '';
@@ -463,6 +509,7 @@ header {
 .product__features {
     list-style: none;
     margin: 0 0 20px;
+    flex-grow: 1;
 }
 
 .product__features li {
@@ -562,8 +609,42 @@ header {
     gap: 24px;
     align-items: flex-start;
     margin-bottom: 60px;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+.about::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border: 1px solid transparent;
+    pointer-events: none;
+    background: linear-gradient(90deg, var(--ghost), var(--ghost-dim), var(--ghost)) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: 300% 100%;
+    background-position: 0% 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.about:hover::after {
+    opacity: 1;
+    animation: borderTrace 0.6s ease-out;
+}
+
+.about:hover {
+    border-color: var(--ghost);
+    box-shadow: 0 0 1px var(--ghost), 0 0 2px var(--ghost);
+}
+
 
 .about__headshot {
     width: 80px;
@@ -572,7 +653,44 @@ header {
     object-fit: cover;
     flex-shrink: 0;
     border: 1px solid var(--dark-rust);
-    box-shadow: 0 2px 8px rgba(255, 170, 0, 0.3);
+    display: block;
+}
+
+.about__headshot-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.about__headshot-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    pointer-events: none;
+    background: linear-gradient(135deg, var(--ghost-alt), var(--ghost), var(--ghost-alt)) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: 300% 300%;
+    background-position: 0% 0%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.about:hover .about__headshot-wrap::after {
+    opacity: 1;
+    animation: headshotTrace 0.8s ease-out;
+}
+
+@keyframes headshotTrace {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
 .about__content {
@@ -638,6 +756,19 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--dark-rust);
+    background: var(--surface);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form__row:hover {
+    border-color: var(--rust);
+}
+
+.contact-form__row:focus-within {
+    border-color: var(--ghost);
+    box-shadow: 0 0 1px var(--ghost), 0 0 2px var(--ghost);
 }
 
 .contact-form__prompt {
@@ -719,8 +850,6 @@ footer {
 }
 
 /* Focus styles */
-.contact-form__input:focus { border-bottom: 1px solid var(--ghost); }
-
 .contact-form__submit:focus,
 .product__link:focus,
 .footer__nav a:focus {

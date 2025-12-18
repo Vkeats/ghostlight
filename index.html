@@ -93,10 +93,10 @@
                 </div>
                 <p class="product__problem">Pre-production: streamlined auditions, collaborative shortlisting, and callback scheduling in one place.</p>
                 <ul class="product__features">
-                    <li>Post calls & filter submissions — no more emails or spreadsheets</li>
-                    <li>Review, rate & shortlist with your team</li>
-                    <li>Schedule auditions & callbacks with confirm/decline tracking</li>
-                    <li>Cloud file management with per-production & per-file access rules</li>
+                    <li>Post calls & collect submissions online</li>
+                    <li>Rate, tag & shortlist with your team</li>
+                    <li>Schedule callbacks with confirm/decline tracking</li>
+                    <li>Share scripts & files with per-production access</li>
                 </ul>
                 <details class="changelog">
                     <summary class="changelog__label">changelog</summary>
@@ -126,7 +126,7 @@
                     <li>Bulk SMS dispatch with seniority enforcement</li>
                     <li>Skill matching across 38,000+ records</li>
                     <li>Conflict detection & audit trail</li>
-                    <li>In production at IATSE Local 118 since June 2024</li>
+                    <li>Response tracking & availability parsing</li>
                 </ul>
                 <details class="changelog">
                     <summary class="changelog__label">changelog</summary>
@@ -145,7 +145,9 @@
         </section>
 
         <section id="about" class="card about">
-            <img src="assets/headshot.jpg" alt="Vincent Keats" class="about__headshot" width="80" height="100" loading="lazy">
+            <div class="about__headshot-wrap">
+                <img src="assets/headshot.jpg" alt="Vincent Keats" class="about__headshot" width="80" height="100" loading="lazy">
+            </div>
             <div class="about__content">
                 <p class="about__label">founder</p>
                 <h2 class="about__name">Vincent Keats</h2>
@@ -154,7 +156,7 @@
                     <p class="typewriter" data-delay="1">Ghostlight started in 2024 while dispatching at IATSE Local 118. Built The Board to automate crew dispatch — now managing 3,400+ workers across hundreds of shows. The Guild followed, applying the same approach to casting and creative teams.</p>
                     <p class="typewriter" data-delay="2">Ghostlight has one goal. Less admin. More art.</p>
                 </div>
-                <form class="contact-form" action="https://formspree.io/f/xblnenyb" method="POST" aria-label="Contact form">
+                <form class="contact-form" data-formspree="xblnenyb" method="POST" aria-label="Contact form">
                     <div class="contact-form__row">
                         <span class="contact-form__prompt" aria-hidden="true">*&nbsp;</span>
                         <input type="email" name="email" class="contact-form__input" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">

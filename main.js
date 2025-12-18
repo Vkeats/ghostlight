@@ -55,22 +55,21 @@
     const toggle = document.querySelector('.theme-toggle');
     if (!light) return;
 
-    const GLITCH_DURATION = 600; // Keep in sync with CSS animation
-
     function triggerGlitch() {
         light.classList.add('glitch');
         light.addEventListener('animationend', () => {
             light.classList.remove('glitch');
         }, { once: true });
 
-        // Ghost peeks near the end of the glitch
+        // Ghost peeks near the end of the glitch (read duration from CSS)
         if (toggle) {
+            const duration = parseFloat(getComputedStyle(light).animationDuration) * 1000 || 600;
             setTimeout(() => {
                 toggle.classList.add('theme-toggle--peeking');
                 setTimeout(() => {
                     toggle.classList.remove('theme-toggle--peeking');
                 }, 500);
-            }, GLITCH_DURATION - 200);
+            }, Math.max(0, duration - 200));
         }
 
         // Random delay between 3-8 seconds
@@ -82,11 +81,19 @@
     setTimeout(triggerGlitch, 2000 + Math.random() * 3000);
 })();
 
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
+// Contact form
+(function() {
+    const form = document.querySelector('.contact-form');
+    if (!form) return;
+
+    const formspreeId = form.dataset.formspree;
+    if (!formspreeId) return;
+
+    const endpoint = `https://formspree.io/f/${formspreeId}`;
+
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const form = e.target;
+
         const status = form.querySelector('.contact-form__status');
         const button = form.querySelector('.contact-form__submit');
 
@@ -94,25 +101,24 @@ if (contactForm) {
         status.textContent = 'Sending...';
         status.className = 'contact-form__status';
 
+        let ok = false;
         try {
-            const response = await fetch(form.action, {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 body: new FormData(form),
                 headers: { 'Accept': 'application/json' }
             });
+            ok = response.ok;
+        } catch {}
 
-            if (response.ok) {
-                status.textContent = 'Message sent.';
-                status.classList.add('contact-form__status--success');
-                form.reset();
-            } else {
-                throw new Error('Failed');
-            }
-        } catch (error) {
+        if (ok) {
+            status.textContent = 'Message sent.';
+            status.classList.add('contact-form__status--success');
+            form.reset();
+        } else {
             status.textContent = 'Failed to send. Try again.';
             status.classList.add('contact-form__status--error');
-        } finally {
-            button.disabled = false;
         }
+        button.disabled = false;
     });
-}
+})();
