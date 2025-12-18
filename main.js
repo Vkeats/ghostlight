@@ -80,55 +80,37 @@
     setTimeout(triggerGlitch, 2000 + Math.random() * 3000);
 })();
 
-// Sticky header on scroll
-(function() {
-    const header = document.querySelector('header');
-    const spacer = document.querySelector('.header-spacer');
-    if (!header || !spacer) return;
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const status = form.querySelector('.contact-form__status');
+        const button = form.querySelector('.contact-form__submit');
 
-    const triggerPoint = header.offsetTop + header.offsetHeight;
-    let isSticky = false;
+        button.disabled = true;
+        status.textContent = 'Sending...';
+        status.className = 'contact-form__status';
 
-    function onScroll() {
-        const shouldBeSticky = window.scrollY > triggerPoint;
-        if (shouldBeSticky !== isSticky) {
-            isSticky = shouldBeSticky;
-            header.classList.toggle('sticky', isSticky);
-            spacer.classList.toggle('active', isSticky);
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                status.textContent = 'Message sent.';
+                status.classList.add('contact-form__status--success');
+                form.reset();
+            } else {
+                throw new Error('Failed');
+            }
+        } catch (error) {
+            status.textContent = 'Failed to send. Try again.';
+            status.classList.add('contact-form__status--error');
+        } finally {
+            button.disabled = false;
         }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-})();
-
-document.querySelector('.contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const status = form.querySelector('.contact-form__status');
-    const button = form.querySelector('.contact-form__submit');
-
-    button.disabled = true;
-    status.textContent = 'Sending...';
-    status.className = 'contact-form__status';
-
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-            status.textContent = 'Message sent.';
-            status.classList.add('contact-form__status--success');
-            form.reset();
-        } else {
-            throw new Error('Failed');
-        }
-    } catch (error) {
-        status.textContent = 'Failed to send. Try again.';
-        status.classList.add('contact-form__status--error');
-    } finally {
-        button.disabled = false;
-    }
-});
+    });
+}

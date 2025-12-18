@@ -142,63 +142,46 @@ body::after {
 
 /* Header / Logo */
 header {
-    max-width: 720px;
-    margin: 0 auto 80px;
-    padding: 80px 24px 0;
-    text-align: center;
-}
-
-header.sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    max-width: none;
-    margin: 0;
-    padding: 16px 24px;
-    background: var(--void);
-    border-bottom: 1px solid var(--dark-rust);
     z-index: 100;
-    animation: slideDown 0.3s ease-out;
-}
-
-header.sticky .tagline {
-    display: none;
-}
-
-header.sticky .logo__text {
-    font-size: 1.4rem;
-}
-
-header.sticky .theme-toggle__ghost {
-    width: 1.8em;
-    height: 1.8em;
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.header-spacer {
-    display: none;
-}
-
-.header-spacer.active {
-    display: block;
-    height: 80px;
+    padding: 16px 24px;
+    text-align: center;
+    background: color-mix(in srgb, var(--void) 85%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--dark-rust);
 }
 
 .logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transform: scale(0.65);
+    transform-origin: center center;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 80px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.hero__title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--chrome);
+    margin-bottom: 16px;
+}
+
+.hero__subtitle {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--steel);
+    letter-spacing: 0.02em;
 }
 
 /* Theme toggle (ghost "o" in logo) */
@@ -328,24 +311,8 @@ header.sticky .theme-toggle__ghost {
     50% { text-shadow: 0 0 15px var(--ghost), 0 0 30px var(--ghost), 0 0 50px var(--ghost-dim); }
 }
 
-.tagline {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--steel);
-    letter-spacing: 0.05em;
-    margin-top: 16px;
-}
 
 /* Products */
-.section-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: var(--rust);
-    letter-spacing: 0.1em;
-    margin-bottom: 20px;
-}
-
 .products {
     display: flex;
     flex-direction: column;
@@ -718,6 +685,7 @@ footer {
 
     header {
         max-width: 1080px;
+        margin: 0 auto;
     }
 
     footer {
@@ -740,9 +708,8 @@ footer {
 
 /* Mobile */
 @media (max-width: 540px) {
-    header { padding: 60px 20px 0; }
+    header { padding: 12px 16px; }
     .container { padding: 0 20px 60px; }
-    .logo__text { font-size: 1.6rem; }
     .card { padding: 24px; }
     .product__status { position: absolute; top: 24px; right: 24px; }
     .about { flex-direction: column; align-items: center; text-align: center; }

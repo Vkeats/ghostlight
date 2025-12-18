@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ghostlight.tech — The operating system for live production</title>
-    <meta name="description" content="The operating system for live production. Modular software for casting, crew dispatch, and production management.">
+    <title>ghostlight.tech — Less admin. More art.</title>
+    <meta name="description" content="Less admin. More art. Production software for casting, dispatch, and crew management in live entertainment.">
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ghostlight.tech">
-    <meta property="og:title" content="ghostlight.tech — The operating system for live production">
-    <meta property="og:description" content="The operating system for live production. Modular software for casting, crew dispatch, and production management.">
+    <meta property="og:title" content="ghostlight.tech — Less admin. More art.">
+    <meta property="og:description" content="Less admin. More art. Production software for casting, dispatch, and crew management in live entertainment.">
     <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ghostlight.tech — The operating system for live production">
-    <meta name="twitter:description" content="The operating system for live production. Modular software for casting, crew dispatch, and production management.">
+    <meta name="twitter:title" content="ghostlight.tech — Less admin. More art.">
+    <meta name="twitter:description" content="Less admin. More art. Production software for casting, dispatch, and crew management in live entertainment.">
     <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
 
     <link rel="canonical" href="https://ghostlight.tech">
@@ -32,7 +32,7 @@
         "name": "Ghostlight",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "description": "Production management software for live entertainment. Casting, auditions, crew dispatch, and scheduling tools.",
+        "description": "Less admin. More art. Production software for casting, dispatch, and crew management in live entertainment.",
         "url": "https://ghostlight.tech",
         "author": {
             "@type": "Person",
@@ -50,6 +50,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
     <script>
         (function() {
             var saved = localStorage.getItem('theme');
@@ -65,13 +66,15 @@
                 <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span><span class="logo__text--light">light</span><span class="logo__text--tech">.tech</span>
             </span>
         </h1>
-        <p class="tagline">The operating system for live production.</p>
     </header>
-    <div class="header-spacer"></div>
+
+    <section class="hero">
+        <h2 class="hero__title">Less admin. More art.</h2>
+        <p class="hero__subtitle">Production software for casting, dispatch, and crew management.</p>
+    </section>
 
     <main class="container">
-        <section class="products" aria-labelledby="products-label">
-            <h2 class="section-label" id="products-label">// modules</h2>
+        <section class="products">
             <article class="card product product--guild">
                 <div class="product__header">
                     <div class="product__title-row">
@@ -134,7 +137,7 @@
         </section>
 
         <section class="card about">
-            <img src="assets/headshot.jpg" alt="Vincent Keats" class="about__headshot" width="80" height="100">
+            <img src="assets/headshot.jpg" alt="Vincent Keats" class="about__headshot" width="80" height="100" loading="lazy">
             <div class="about__content">
                 <p class="about__label">founder</p>
                 <h2 class="about__name">Vincent Keats</h2>
@@ -168,6 +171,5 @@
         <p class="footer__copyright">© 2025 ghostlight</p>
     </footer>
 
-    <script src="main.js" defer></script>
 </body>
 </html>
