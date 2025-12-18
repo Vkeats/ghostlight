@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Embed Orbitron font -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=IBM+Plex+Sans:wght@300&amp;family=Share+Tech+Mono&amp;display=swap');
+    </style>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0a0c"/>
+
+  <!-- Subtle grid -->
+  <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(5,217,232,0.15)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Logo group - centered -->
+  <g transform="translate(560, 220)">
+    <!-- "gh" text - right before ghost -->
+    <text x="-38" y="0" font-family="'Orbitron', sans-serif" font-size="72" font-weight="700" fill="#e0e0e8" letter-spacing="4" text-anchor="end">gh</text>
+
+    <!-- Ghost icon - centered at 0, which will be above center of "L" -->
+    <g transform="translate(0, -20)">
+      <!-- Cyan glitch offset -->
+      <path d="M0 -28c-15.4 0-28 12.6-28 28v28c0 0 5.6-5.6 11.2-5.6s5.6 5.6 11.2 5.6 5.6-5.6 11.2-5.6 5.6 5.6 11.2 5.6 11.2 5.6 11.2 5.6V0c0-15.4-12.6-28-28-28z" fill="#05d9e8" opacity="0.8" transform="translate(-4, -4)"/>
+      <!-- Main ghost -->
+      <path d="M0 -28c-15.4 0-28 12.6-28 28v28c0 0 5.6-5.6 11.2-5.6s5.6 5.6 11.2 5.6 5.6-5.6 11.2-5.6 5.6 5.6 11.2 5.6 11.2 5.6 11.2 5.6V0c0-15.4-12.6-28-28-28z" fill="#ffaa00" filter="url(#glow)"/>
+      <!-- Eyes -->
+      <circle cx="-11" cy="-6" r="5.6" fill="#0a0a0c"/>
+      <circle cx="11" cy="-6" r="5.6" fill="#0a0a0c"/>
+    </g>
+
+    <!-- "st" text - right after ghost -->
+    <text x="38" y="0" font-family="'Orbitron', sans-serif" font-size="72" font-weight="700" fill="#e0e0e8" letter-spacing="4">st</text>
+
+    <!-- "light" text - L centered under ghost, with glitch effect -->
+    <!-- Cyan offset layer (glitch) -->
+    <text x="-12" y="76" font-family="'Orbitron', sans-serif" font-size="72" font-weight="700" fill="#05d9e8" letter-spacing="4" opacity="0.8">light</text>
+    <!-- Main text -->
+    <text x="-8" y="80" font-family="'Orbitron', sans-serif" font-size="72" font-weight="700" fill="#ffaa00" filter="url(#textGlow)" letter-spacing="4">light</text>
+  </g>
+
+  <!-- Tagline -->
+  <text x="600" y="420" font-family="'Orbitron', sans-serif" font-size="28" font-weight="700" fill="#a8a8b8" text-anchor="middle" letter-spacing="2">Less admin. More art.</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="470" font-family="'Share Tech Mono', monospace" font-size="18" fill="#5a5a6e" text-anchor="middle">Production software for live entertainment</text>
+</svg>
