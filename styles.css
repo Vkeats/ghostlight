@@ -239,6 +239,20 @@ header {
     letter-spacing: 0.02em;
 }
 
+.hero__art {
+    background: linear-gradient(90deg, var(--ghost), var(--ghost-alt), var(--ghost));
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: artGradient 7s ease-in-out infinite;
+}
+
+@keyframes artGradient {
+    0%, 100% { background-position: 0% 0; }
+    50% { background-position: 100% 0; }
+}
+
 /* Theme toggle (ghost "o" in logo) */
 .theme-toggle {
     background: none;
