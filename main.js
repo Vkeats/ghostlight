@@ -49,18 +49,18 @@
     });
 })();
 
-// Random glitch effect on .tech + ghost eye peek
+// Random glitch effect on "light" + ghost eye peek
 (function() {
-    const tech = document.querySelector('.logo__text--tech');
+    const light = document.querySelector('.logo__text--light');
     const toggle = document.querySelector('.theme-toggle');
-    if (!tech) return;
+    if (!light) return;
 
     const GLITCH_DURATION = 600; // Keep in sync with CSS animation
 
     function triggerGlitch() {
-        tech.classList.add('glitch');
-        tech.addEventListener('animationend', () => {
-            tech.classList.remove('glitch');
+        light.classList.add('glitch');
+        light.addEventListener('animationend', () => {
+            light.classList.remove('glitch');
         }, { once: true });
 
         // Ghost peeks near the end of the glitch

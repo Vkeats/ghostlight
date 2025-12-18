@@ -61,11 +61,19 @@
 </head>
 <body>
     <header>
-        <h1 class="logo">
-            <span class="logo__text">
-                <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span><span class="logo__text--light">light</span><span class="logo__text--tech">.tech</span>
+        <h1 class="logo logo--stacked">
+            <span class="logo__line logo__line--top">
+                <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+            </span>
+            <span class="logo__line logo__line--bottom">
+                <span class="logo__text--light">light</span>
             </span>
         </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="#guild">Guild</a>
+            <a href="#board">Board</a>
+            <a href="#about">About</a>
+        </nav>
     </header>
 
     <section class="hero">
@@ -75,7 +83,7 @@
 
     <main class="container">
         <section class="products">
-            <article class="card product product--guild">
+            <article id="guild" class="card product product--guild">
                 <div class="product__header">
                     <div class="product__title-row">
                         <img src="assets/the-guild.svg" alt="" class="product__logo" width="32" height="32">
@@ -105,7 +113,7 @@
                 <a href="https://www.the-guild.app/about" class="product__link" target="_blank" rel="noopener">Learn more →</a>
             </article>
 
-            <article class="card product product--board">
+            <article id="board" class="card product product--board">
                 <div class="product__header">
                     <div class="product__title-row">
                         <img src="assets/the-board.svg" alt="" class="product__logo" width="32" height="32">
@@ -136,7 +144,7 @@
             </article>
         </section>
 
-        <section class="card about">
+        <section id="about" class="card about">
             <img src="assets/headshot.jpg" alt="Vincent Keats" class="about__headshot" width="80" height="100" loading="lazy">
             <div class="about__content">
                 <p class="about__label">founder</p>
