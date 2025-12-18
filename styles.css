@@ -1,3 +1,11 @@
+/* Enable animating --reveal-size for gradient transition.
+   Firefox doesn't support @property; falls back to instant theme switch. */
+@property --reveal-size {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
 :root {
     /* Colors */
     --void: #0a0a0c;
@@ -17,10 +25,62 @@
     --dark-rust: #2a2a32;
     --error: #ff6b6b;
 
+    /* Grid overlay */
+    --grid-color: rgba(0, 255, 157, 0.02);
+
     /* Fonts */
     --font-body: 'IBM Plex Sans', sans-serif;
     --font-display: 'Orbitron', sans-serif;
     --font-mono: 'Share Tech Mono', monospace;
+}
+
+/* Light theme */
+[data-theme="light"] {
+    --void: #f5f3ef;
+    --surface: #ffffff;
+    --ghost: #00c8d7;
+    --ghost-dim: #00a8b5;
+    --ghost-glow: transparent;
+    --chrome: #1a1a1f;
+    --steel: #3a3a4a;
+    --rust: #6a6a7e;
+    --dark-rust: #d8d6d0;
+    --grid-color: rgba(0, 100, 80, 0.04);
+}
+
+[data-theme="light"] .logo__text--light {
+    text-shadow: none;
+    animation: none;
+}
+
+/* Theme transition - radial gradient pulse */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+    mask: radial-gradient(
+        circle at var(--pulse-x, 50%) var(--pulse-y, 50%),
+        black var(--reveal-size, 0%),
+        transparent calc(var(--reveal-size, 0%) + 10%)
+    );
+    animation: gradient-reveal 0.8s ease-out forwards;
+}
+
+@keyframes gradient-reveal {
+    from { --reveal-size: 0%; }
+    to { --reveal-size: 150%; }
+}
+
+/* Ghost color transition after landing */
+.theme-toggle--animating {
+    color: var(--ghost-pre-transition);
+}
+
+.theme-toggle {
+    transition: color 0.15s ease-out;
 }
 
 * {
@@ -37,6 +97,15 @@ body {
     line-height: 1.7;
     font-size: 16px;
     overflow-x: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Theme transitions */
+.card,
+.product__status,
+.changelog,
+footer {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 
@@ -49,8 +118,8 @@ body::after {
     right: 0;
     bottom: 0;
     background-image:
-        linear-gradient(rgba(0, 255, 157, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 157, 0.02) 1px, transparent 1px);
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
     z-index: -1;
@@ -79,10 +148,124 @@ header {
     text-align: center;
 }
 
+header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: none;
+    margin: 0;
+    padding: 16px 24px;
+    background: var(--void);
+    border-bottom: 1px solid var(--dark-rust);
+    z-index: 100;
+    animation: slideDown 0.3s ease-out;
+}
+
+header.sticky .tagline {
+    display: none;
+}
+
+header.sticky .logo__text {
+    font-size: 1.4rem;
+}
+
+header.sticky .theme-toggle__ghost {
+    width: 1.8em;
+    height: 1.8em;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.header-spacer {
+    display: none;
+}
+
+.header-spacer.active {
+    display: block;
+    height: 80px;
+}
+
 .logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Theme toggle (ghost "o" in logo) */
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 -0.02em;
+    cursor: pointer;
+    color: var(--ghost);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transition: transform 0.15s ease;
+}
+
+.theme-toggle__ghost {
+    width: 2.7em;
+    height: 2.7em;
+    filter:
+        drop-shadow(0 0 4px var(--ghost-glow))
+        drop-shadow(0 0 8px var(--ghost-glow))
+        drop-shadow(0 0 16px var(--ghost-glow));
+    transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.theme-toggle:hover .theme-toggle__ghost {
+    filter:
+        drop-shadow(0 0 6px var(--ghost))
+        drop-shadow(0 0 12px var(--ghost))
+        drop-shadow(0 0 24px var(--ghost-glow));
+    transform: scale(1.1);
+}
+
+.theme-toggle:focus {
+    outline: none;
+}
+
+.theme-toggle:focus .theme-toggle__ghost {
+    filter:
+        drop-shadow(0 0 6px var(--ghost))
+        drop-shadow(0 0 12px var(--ghost))
+        drop-shadow(0 0 24px var(--ghost-glow));
+}
+
+.theme-toggle__eye {
+    fill: var(--void);
+    transition: transform 0.15s ease-out;
+}
+
+.theme-toggle--peeking .theme-toggle__eye {
+    transform: translateX(1.5px);
+}
+
+/* Ghost float animation on click */
+.theme-toggle--animating .theme-toggle__ghost {
+    animation: ghostFloat 0.8s ease-in-out;
+}
+
+@keyframes ghostFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-12px) scale(1.1);
+    }
 }
 
 .logo__text {
@@ -520,9 +703,11 @@ footer {
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .logo__text--light,
-    .about__bio .typewriter { animation: none; }
+    .about__bio .typewriter,
+    .theme-toggle--animating .theme-toggle__ghost { animation: none; }
     .about__bio .typewriter { opacity: 1; }
-    .product, .product__link, .contact-form__submit, .footer__nav a { transition: none; }
+    .product, .product__link, .contact-form__submit, .footer__nav a,
+    body, .card, .product__status, .changelog, footer, .theme-toggle, .theme-toggle__ghost { transition: none; }
 }
 
 /* Desktop - 2 column products */
