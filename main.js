@@ -55,20 +55,22 @@
     const toggle = document.querySelector('.theme-toggle');
     if (!tech) return;
 
+    const GLITCH_DURATION = 600; // Keep in sync with CSS animation
+
     function triggerGlitch() {
         tech.classList.add('glitch');
         tech.addEventListener('animationend', () => {
             tech.classList.remove('glitch');
         }, { once: true });
 
-        // Ghost notices the glitch after a beat
+        // Ghost peeks near the end of the glitch
         if (toggle) {
             setTimeout(() => {
                 toggle.classList.add('theme-toggle--peeking');
                 setTimeout(() => {
                     toggle.classList.remove('theme-toggle--peeking');
                 }, 500);
-            }, 300);
+            }, GLITCH_DURATION - 200);
         }
 
         // Random delay between 3-8 seconds
