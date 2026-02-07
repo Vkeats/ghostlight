@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Client, First Release: The Board v0.1.1 — ghostlight.tech</title>
+    <meta name="description" content="The Board ships v0.1.1 — production-ready crew dispatch for IATSE locals. From learning to code to landing a first client in two years.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/first-release.html">
+    <meta property="og:title" content="First Client, First Release: The Board v0.1.1">
+    <meta property="og:description" content="Production-ready crew dispatch for IATSE locals — 150+ features, first paying client, and what's next.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-02-07">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="First Client, First Release: The Board v0.1.1">
+    <meta name="twitter:description" content="Production-ready crew dispatch for IATSE locals — 150+ features, first paying client, and what's next.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/first-release.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#guild">Guild</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Feb 7, 2026</span>
+                <span>5 min read</span>
+            </div>
+            <h1 class="blog-post__title">First Client, First Release: The Board v0.1.1</h1>
+
+            <div class="blog-post__content">
+                <p>Two years ago I started CS50 with no coding experience. I was working full-time as a crew dispatcher at IATSE Local 118 in Vancouver, spending my days texting, and copy pasting into spreadsheets trying to get the right people to the right shows. This week, The Board shipped its first tagged release to its first paying client.</p>
+
+                <p>This post is about what we built, what shipped in v0.1.1, and where we're going.</p>
+
+                <h2>The problem</h2>
+
+                <p>If you work in live entertainment, you already know: crew dispatch is a mess. A venue needs 12 stagehands for a load-in tomorrow. The dispatcher opens a spreadsheet, checks seniority, cross-references skills and availability, then starts texting — one by one. Someone declines, you go to the next person on the list. Repeat for every position, every show, every day.</p>
+
+                <p>Union rules add complexity. Seniority matters. Skill qualifications matter. Conflict detection matters. And the whole thing needs an audit trail because the collective bargaining agreement says so.</p>
+
+                <p>That's the world I was living in. So I built a tool to fix it.</p>
+
+                <h2>What The Board does</h2>
+
+                <p>The Board is crew dispatch software built specifically for IATSE locals and similar union operations. It replaces the spreadsheet-and-texting workflow with a system that actually understands union rules.</p>
+
+                <ul>
+                    <li>Bulk SMS dispatch with automatic seniority enforcement</li>
+                    <li>Skill matching across thousands of qualification records</li>
+                    <li>Real-time conflict detection and availability tracking</li>
+                    <li>Response parsing — workers reply by text, The Board updates automatically</li>
+                    <li>Full audit trail for every assignment decision</li>
+                </ul>
+
+                <p>It's been running in production at Local 118 for over a year, dispatching real crews to real shows — hundreds of events, thousands of SMS messages, 3,400+ workers managed.</p>
+
+                <h2>What shipped in v0.1.1</h2>
+
+                <p>This release represents the first formal version tag on what's been a continuously deployed production system. The changelog tells the scale: 150+ features, 100+ bug fixes, and a handful of performance improvements. Here are the highlights.</p>
+
+                <div class="blog-post__highlight">
+                    <h3>Dispatch & Assignment</h3>
+                    <ul>
+                        <li>Auto-assignment engine with seniority-based ranking</li>
+                        <li>Batch crew calls with calendar view and direct assignment</li>
+                        <li>Draft position system for editing crew calls before sending</li>
+                        <li>Dispatch event sourcing for full offer lifecycle tracking</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Worker Portal</h3>
+                    <ul>
+                        <li>Bidding system — workers can express interest in posted jobs</li>
+                        <li>Career dashboard with assignment history and skill tracking</li>
+                        <li>Global availability toggle with return-date scheduling</li>
+                        <li>ICS calendar sync for confirmed assignments</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Communications</h3>
+                    <ul>
+                        <li>Unified dispatcher inbox — email and SMS in one place</li>
+                        <li>AI-powered PDF crew call parsing from incoming emails</li>
+                        <li>Job-scoped communication hub for per-show coordination</li>
+                        <li>Structured PPE requirements in SMS notifications</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Operations</h3>
+                    <ul>
+                        <li>Timesheet tracking with overtime approval workflow</li>
+                        <li>Attendance tracking system</li>
+                        <li>Dispatcher scheduling and leave management</li>
+                        <li>Executive dashboard with operational reports</li>
+                    </ul>
+                </div>
+
+                <p>Plus: Stripe billing integration, comprehensive accessibility improvements (WCAG 2.1 AA), automated database backups, CVE patches for Next.js, and a complete house roster system with venue-specific worker management.</p>
+
+                <h2>First client</h2>
+
+                <p>The Board started as something I built for myself — a dispatcher who was tired of the old way. Having a local actually sign on as a paying client is a different milestone entirely. It means someone looked at this and said: "Yes, I trust this to run my dispatch."</p>
+
+                <p>That validation matters more than any feature count. It means the system works not just for me, but for other dispatchers dealing with the same problems at their own locals.</p>
+
+                <p>If you're at an IATSE local or similar operation and crew dispatch is eating your day, <a href="https://the-board.app/landing" target="_blank" rel="noopener">take a look</a>. The Board was built by a dispatcher, for dispatchers.</p>
+
+                <h2>What's next</h2>
+
+                <p>This release is a foundation. Here's what's coming:</p>
+
+                <ul>
+                    <li>Expanding the Worker Portal — more self-service tools for crew members</li>
+                    <li>Multi-local support — built for one local, scaling to many</li>
+                    <li>Deeper reporting — workforce analytics, utilization tracking, permit hour management</li>
+                    <li>Mobile improvements — better experience for workers on the go</li>
+                </ul>
+
+                <p>Meanwhile, <a href="https://www.the-guild.app/about" target="_blank" rel="noopener">The Guild</a> — our casting and audition management tool — is in preview, applying the same approach to pre-production. Same philosophy: less admin, more art.</p>
+
+                <h2>The short version</h2>
+
+                <p>I learned to code to solve a problem I dealt with every day. Two years later, the solution has a version number and a client. The Board v0.1.1 is production-ready crew dispatch for IATSE locals — built in the field, tested under real conditions, and now available to any local that's tired of the spreadsheet.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>
