@@ -253,6 +253,12 @@ header {
     50% { background-position: 100% 0; }
 }
 
+.hero__log {
+    color: var(--ghost);
+    text-shadow: 0 0 10px var(--ghost), 0 0 20px var(--ghost), 0 0 40px var(--ghost-dim);
+    animation: pulse 3s ease-in-out infinite;
+}
+
 /* Theme toggle (ghost "o" in logo) */
 .theme-toggle {
     background: none;
@@ -874,6 +880,7 @@ footer {
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .logo__text--light,
+    .hero__log,
     .about__bio .typewriter,
     .theme-toggle--animating .theme-toggle__ghost { animation: none; }
     .about__bio .typewriter { opacity: 1; }

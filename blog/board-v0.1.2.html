@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Board v0.1.2: Dispatch Workflow Refinements — ghostlight.tech</title>
+    <meta name="description" content="The Board v0.1.2 ships dispatch UI consolidation, smarter SMS classification, and code health improvements — getting ready for onboarding.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/board-v0.1.2.html">
+    <meta property="og:title" content="The Board v0.1.2: Dispatch Workflow Refinements">
+    <meta property="og:description" content="Consolidating views, classifying SMS by intent, and cleaning up code health. Getting The Board ready for onboarding.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-02-08">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Board v0.1.2: Dispatch Workflow Refinements">
+    <meta name="twitter:description" content="Consolidating views, classifying SMS by intent, and cleaning up code health. Getting The Board ready for onboarding.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/board-v0.1.2.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#guild">Guild</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Feb 8, 2026</span>
+                <span>4 min read</span>
+            </div>
+            <h1 class="blog-post__title">The Board v0.1.2: Dispatch Workflow Refinements</h1>
+
+            <div class="blog-post__content">
+                <p>The Board v0.1.2 is out. This release is about preparation — tightening up the dispatch workflow, cleaning up code health, and getting the system ready for onboarding next week. Consolidated views, smarter SMS handling, and a more maintainable codebase.</p>
+
+                <h2>Getting ready for onboarding</h2>
+
+                <p>There's a difference between software that works and software that's ready for new users. The Board has been running live, but onboarding means putting the system in front of dispatchers who haven't seen it before. Every rough edge matters more when someone is forming their first impression.</p>
+
+                <p>This release focuses on the things that need to be solid before that happens — views that make sense on first use, SMS workflows that don't require explanation, and code underneath that won't surprise anyone with state bugs during a demo.</p>
+
+                <h2>What shipped</h2>
+
+                <p>Version 0.1.2 includes 20+ targeted improvements across dispatch workflows, communications, and infrastructure. Here's what shipped.</p>
+
+                <div class="blog-post__highlight">
+                    <h3>Dispatch Views</h3>
+                    <ul>
+                        <li>Consolidated calendar view into card view with call type and date grouping — fewer clicks to see the same information</li>
+                        <li>Position cards now always show call duration — no more guessing at shift length</li>
+                        <li>Added group-by-dispatcher view to jobs list — helps multi-dispatcher operations track who's handling what</li>
+                        <li>Setup and strike call types now handled correctly in hours calculator and timeline — previously treated as standard calls</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>SMS & Communications</h3>
+                    <ul>
+                        <li>Dispatch log now classifies SMS by type — offer, confirmation, decline, inquiry — with pipeline ordering based on intent</li>
+                        <li>Clear button on comms action items for irrelevant messages — stops noise from blocking the needs-action queue</li>
+                        <li>SMS conversations no longer auto-mark as processed when viewed — dispatcher control over workflow state</li>
+                        <li>Fixed SMS toggle buttons in spreadsheet view not updating visually — UI was out of sync with state</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>UI Fixes</h3>
+                    <ul>
+                        <li>Needs Action section no longer collapses unexpectedly</li>
+                        <li>Toolbar layout stabilized, duplicate stats removed</li>
+                        <li>Fixed loading state in PositionHeatmapGrid</li>
+                        <li>Color temperature slider added — warm mode overlay for late-night dispatch shifts</li>
+                        <li>Streamlined nav menu for cleaner navigation</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Code Health</h3>
+                    <ul>
+                        <li>Added ESLint to the project and fixed a critical React hooks violation that was causing state bugs</li>
+                        <li>Resolved exhaustive-deps warnings across the entire codebase — 10 batched pull requests to clean up all hook dependencies</li>
+                        <li>Composite indexes added to the database, plus an N+1 query fixed in the board jobs API — performance improvements for multi-job views</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Infrastructure</h3>
+                    <ul>
+                        <li>Fixed Docker build by skipping lifecycle scripts in production deps stage</li>
+                        <li>Fixed backup service database filename — backups were writing to the wrong path</li>
+                    </ul>
+                </div>
+
+                <h2>Why SMS classification matters</h2>
+
+                <p>One of the less obvious improvements in this release is SMS intent classification. When a dispatcher sends bulk offers to 30 workers, replies come back in a flood. Some are acceptances. Some are declines. Some are questions about the shift details. Others are completely unrelated messages that happened to arrive at the same time.</p>
+
+                <p>The dispatch log now classifies each incoming SMS by type and orders them according to where they sit in the dispatch pipeline. Offers that need responses surface first. Confirmations get grouped together. Irrelevant messages can be cleared with a button press instead of cluttering the action queue.</p>
+
+                <p>It's a small change in code, but it saves dispatchers from manually sorting through message threads when they're trying to fill a crew call before curtain.</p>
+
+                <h2>Code health isn't optional</h2>
+
+                <p>Adding ESLint to the project wasn't glamorous, but it was necessary. The React hooks violation it caught had been causing intermittent state bugs that were hard to reproduce. The exhaustive-deps warnings across the codebase represented dozens of places where hook dependencies weren't correctly specified — each one a potential source of stale closures or missed re-renders.</p>
+
+                <p>Fixing all of it took 10 pull requests and a lot of careful refactoring. But now the codebase has guardrails. New code gets linted before it ships, and the hooks rules catch problems before they ship.</p>
+
+                <p>Technical debt compounds. Paying it down early keeps the system maintainable.</p>
+
+                <h2>What's next</h2>
+
+                <p>Onboarding is next week. After that, the roadmap opens up:</p>
+
+                <ul>
+                    <li>Enhanced reporting — workforce utilization, permit hour tracking, per-position analytics</li>
+                    <li>Multi-local architecture — right now The Board is single-tenant; scaling to support multiple locals with data isolation</li>
+                    <li>Mobile-first improvements for the worker portal — crew members interact with the system from their phones, and the experience should reflect that</li>
+                    <li>Expanded automation in the dispatch pipeline — more decisions the system can make on behalf of the dispatcher based on configured rules</li>
+                </ul>
+
+                <p>Meanwhile, The Guild continues in preview. If you're running auditions or managing casting for a theatre company, take a look at <a href="https://www.the-guild.app/about" target="_blank" rel="noopener">the-guild.app</a>.</p>
+
+                <h2>The short version</h2>
+
+                <p>The Board v0.1.2 ships 20+ improvements to get the system onboarding-ready. Consolidated views, smarter SMS classification, and a cleaner codebase. Next week, new dispatchers sit down with it for the first time.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>
