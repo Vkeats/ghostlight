@@ -61,7 +61,7 @@
             <a href="./" class="blog-post__back">← Back to blog</a>
             <div class="blog-post__meta">
                 <span>Feb 8, 2026</span>
-                <span>4 min read</span>
+                <span>5 min read</span>
             </div>
             <h1 class="blog-post__title">The Board v0.1.2: Dispatch Workflow Refinements</h1>
 
@@ -76,7 +76,7 @@
 
                 <h2>What shipped</h2>
 
-                <p>Version 0.1.2 includes 20+ targeted improvements across dispatch workflows, communications, and infrastructure. Here's what shipped.</p>
+                <p>Version 0.1.2 includes 40+ targeted improvements across dispatch workflows, communications, and infrastructure. Here's what shipped.</p>
 
                 <div class="blog-post__highlight">
                     <h3>Dispatch Views</h3>
@@ -84,7 +84,20 @@
                         <li>Consolidated calendar view into card view with call type and date grouping — fewer clicks to see the same information</li>
                         <li>Position cards now always show call duration — no more guessing at shift length</li>
                         <li>Added group-by-dispatcher view to jobs list — helps multi-dispatcher operations track who's handling what</li>
-                        <li>Setup and strike call types now handled correctly in hours calculator and timeline — previously treated as standard calls</li>
+                        <li>Setup and strike call types now handled correctly in hours calculator and timeline</li>
+                        <li>House roster rank now computed over the full roster, not the filtered subset — seniority stays accurate regardless of filters</li>
+                        <li>Same-show assignments distinguished from external conflicts in the timeline — dispatchers can tell at a glance whether a worker is busy on the same gig or a different one</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Roster & Spreadsheet</h3>
+                    <ul>
+                        <li>Roster UI overhaul — filter sheet, group headers, and jump navigation for faster crew lookup</li>
+                        <li>Spreadsheet legend now grouped by skill hierarchy</li>
+                        <li>Skeleton loader and theme overhaul for the spreadsheet view</li>
+                        <li>Optimistic UI updates for position field edits in both views — changes feel instant</li>
+                        <li>Priority system overhauled, job status types consolidated, badge readability improved</li>
                     </ul>
                 </div>
 
@@ -94,35 +107,30 @@
                         <li>Dispatch log now classifies SMS by type — offer, confirmation, decline, inquiry — with pipeline ordering based on intent</li>
                         <li>Clear button on comms action items for irrelevant messages — stops noise from blocking the needs-action queue</li>
                         <li>SMS conversations no longer auto-mark as processed when viewed — dispatcher control over workflow state</li>
-                        <li>Fixed SMS toggle buttons in spreadsheet view not updating visually — UI was out of sync with state</li>
+                        <li>Simplified JobCommsHub into a focused action queue — one thing at a time</li>
                     </ul>
                 </div>
 
                 <div class="blog-post__highlight">
-                    <h3>UI Fixes</h3>
+                    <h3>Performance & Real-time</h3>
                     <ul>
-                        <li>Needs Action section no longer collapses unexpectedly</li>
-                        <li>Toolbar layout stabilized, duplicate stats removed</li>
-                        <li>Fixed loading state in PositionHeatmapGrid</li>
-                        <li>Color temperature slider added — warm mode overlay for late-night dispatch shifts</li>
-                        <li>Streamlined nav menu for cleaner navigation</li>
+                        <li>Eliminated N+1 queries in batch SMS send and board jobs API</li>
+                        <li>Fixed double render on group toggle and search input lag</li>
+                        <li>Resolved infinite render loops in dispatch page and roster</li>
+                        <li>Fixed WebSocket connection race condition</li>
+                        <li>Restored WebSocket real-time cache invalidation pipeline</li>
+                        <li>Composite indexes added to the database for multi-job views</li>
                     </ul>
                 </div>
 
                 <div class="blog-post__highlight">
-                    <h3>Code Health</h3>
+                    <h3>Code Health & Infrastructure</h3>
                     <ul>
-                        <li>Added ESLint to the project and fixed a critical React hooks violation that was causing state bugs</li>
-                        <li>Resolved exhaustive-deps warnings across the entire codebase — 10 batched pull requests to clean up all hook dependencies</li>
-                        <li>Composite indexes added to the database, plus an N+1 query fixed in the board jobs API — performance improvements for multi-job views</li>
-                    </ul>
-                </div>
-
-                <div class="blog-post__highlight">
-                    <h3>Infrastructure</h3>
-                    <ul>
-                        <li>Fixed Docker build by skipping lifecycle scripts in production deps stage</li>
-                        <li>Fixed backup service database filename — backups were writing to the wrong path</li>
+                        <li>Added ESLint and fixed a critical React hooks violation that was causing state bugs</li>
+                        <li>Resolved exhaustive-deps warnings across the entire codebase — 10 batched pull requests</li>
+                        <li>Extracted shared position-grid components into CrewcallGrid</li>
+                        <li>"Keep me logged in" option added to login</li>
+                        <li>Fixed Docker build, backup service DB filename, Redis bound to localhost only</li>
                     </ul>
                 </div>
 
@@ -144,20 +152,19 @@
 
                 <h2>What's next</h2>
 
-                <p>Onboarding is next week. After that, the roadmap opens up:</p>
+                <p>Onboarding is next week. After that, the focus stays on stability — making sure the system holds up under real daily use before adding anything new.</p>
 
                 <ul>
-                    <li>Enhanced reporting — workforce utilization, permit hour tracking, per-position analytics</li>
-                    <li>Multi-local architecture — right now The Board is single-tenant; scaling to support multiple locals with data isolation</li>
-                    <li>Mobile-first improvements for the worker portal — crew members interact with the system from their phones, and the experience should reflect that</li>
-                    <li>Expanded automation in the dispatch pipeline — more decisions the system can make on behalf of the dispatcher based on configured rules</li>
+                    <li>Continued performance work — monitoring query times, render performance, and WebSocket reliability under load</li>
+                    <li>Edge case hardening — the kind of bugs that only show up when dispatchers use the system in ways you didn't anticipate</li>
+                    <li>Mobile polish for the worker portal — crew members interact with the system from their phones, and the experience needs to be solid</li>
                 </ul>
 
                 <p>Meanwhile, The Guild continues in preview. If you're running auditions or managing casting for a theatre company, take a look at <a href="https://www.the-guild.app/about" target="_blank" rel="noopener">the-guild.app</a>.</p>
 
                 <h2>The short version</h2>
 
-                <p>The Board v0.1.2 ships 20+ improvements to get the system onboarding-ready. Consolidated views, smarter SMS classification, and a cleaner codebase. Next week, new dispatchers sit down with it for the first time.</p>
+                <p>The Board v0.1.2 ships 40+ improvements to get the system onboarding-ready. Consolidated views, smarter SMS classification, real-time fixes, and a cleaner codebase. Next week, new dispatchers sit down with it for the first time.</p>
 
                 <blockquote><p>The light stays on.</p></blockquote>
             </div>
