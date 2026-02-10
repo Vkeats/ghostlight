@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Board v0.1.3: Launch Week — ghostlight.tech</title>
+    <meta name="description" content="Critical seniority fixes, security hardening, and UI consolidation. Getting The Board launch-ready for IATSE Local 118's onboarding this week.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/board-v0.1.3.html">
+    <meta property="og:title" content="The Board v0.1.3: Launch Week">
+    <meta property="og:description" content="Critical seniority fixes, security hardening, and UI consolidation. Getting The Board launch-ready for IATSE Local 118's onboarding this week.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-02-10">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Board v0.1.3: Launch Week">
+    <meta name="twitter:description" content="Critical seniority fixes, security hardening, and UI consolidation. Getting The Board launch-ready for IATSE Local 118's onboarding this week.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/board-v0.1.3.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#guild">Guild</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Feb 10, 2026</span>
+                <span>4 min read</span>
+            </div>
+            <h1 class="blog-post__title">The Board v0.1.3: Launch Week</h1>
+
+            <div class="blog-post__content">
+                <p>The Board v0.1.3 ships today. IATSE Local 118 starts onboarding this week, so this sprint has been a pre-launch audit — going through seniority queries, auth checks, and anywhere data could silently fail. You're handing the system to dispatchers who won't know the workarounds. It just has to work.</p>
+
+                <h2>What shipped</h2>
+
+                <p>Version 0.1.3 includes 6 new features, 14 critical bug fixes, and a consolidated dispatch interface. The features are mostly polish — success toasts, mobile optimizations, CSV imports. The fixes are what matter.</p>
+
+                <div class="blog-post__highlight">
+                    <h3>Seniority integrity</h3>
+                    <ul>
+                        <li>Added <code>NULLS LAST</code> to all seniority ASC queries to prevent NULL workers from regressing to the top of ranked lists</li>
+                        <li>Audited and corrected every query that touches seniority ordering</li>
+                        <li>Fixed priority sort edge cases in batch assignment flows</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Security and authentication</h3>
+                    <ul>
+                        <li>Replaced string comparison in auth checks with timing-safe compare to prevent timing attacks</li>
+                        <li>Added authentication boundary validation in code review-flagged areas</li>
+                        <li>Improved error handling to prevent information leakage</li>
+                        <li>Added offer state transition validation and guards to prevent invalid state changes</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Data integrity and error surfacing</h3>
+                    <ul>
+                        <li>Fixed auto-approve fallthrough that could skip validation steps</li>
+                        <li>Corrected CSV parser silent passthrough that ignored malformed rows</li>
+                        <li>Surfaced SMS preview errors to UI instead of silently swallowing failures</li>
+                        <li>Added conversation timestamp handling and removed unbounded queries</li>
+                        <li>Fixed WebSocket event handler leaks and cleanup issues</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Dispatch interface consolidation</h3>
+                    <ul>
+                        <li>Consolidated dispatch UI with compact job header, time-based crew sheet, and all call types in one view</li>
+                        <li>Replaced SMS Composer sidebar with auto-templates and inline notes for faster dispatch workflow</li>
+                        <li>Redesigned worker timeline as horizontal strip with enriched bars for easier conflict detection</li>
+                        <li>Consolidated labour request forms into single shared component</li>
+                        <li>Extended worker timeline scale to handle overnight shifts past midnight</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>SMS and communication fixes</h3>
+                    <ul>
+                        <li>Ensured reference ID is never included in batch SMS messages</li>
+                        <li>Fixed batch SMS offers to use job settings for call types and tags</li>
+                        <li>Added worker detail panel to SMS interface</li>
+                        <li>Fixed whitespace handling in SMS composition</li>
+                    </ul>
+                </div>
+
+                <p>Plus: mobile-optimized position editor with CSV import for employer requests, success toasts for key actions, and silent position skipping fixes. All told, 20 commits focused on making sure the system doesn't fail when it matters.</p>
+
+                <h2>What's next</h2>
+
+                <p>Support Local 118 through their first days of live dispatch. Be available. Fix what comes up. Two years of building — I've fixed everything I know about. Time to find out what I don't.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>

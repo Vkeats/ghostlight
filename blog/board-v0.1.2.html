@@ -61,22 +61,16 @@
             <a href="./" class="blog-post__back">← Back to blog</a>
             <div class="blog-post__meta">
                 <span>Feb 8, 2026</span>
-                <span>5 min read</span>
+                <span>3 min read</span>
             </div>
             <h1 class="blog-post__title">The Board v0.1.2: Dispatch Workflow Refinements</h1>
 
             <div class="blog-post__content">
-                <p>The Board v0.1.2 is out. This release is about preparation — tightening up the dispatch workflow, cleaning up code health, and getting the system ready for onboarding next week. Consolidated views, smarter SMS handling, and a more maintainable codebase.</p>
-
-                <h2>Getting ready for onboarding</h2>
-
-                <p>There's a difference between software that works and software that's ready for new users. The Board has been running live, but onboarding means putting the system in front of dispatchers who haven't seen it before. Every rough edge matters more when someone is forming their first impression.</p>
-
-                <p>This release focuses on the things that need to be solid before that happens — views that make sense on first use, SMS workflows that don't require explanation, and code underneath that won't surprise anyone with state bugs during a demo.</p>
+                <p>The Board v0.1.2 is out. Onboarding starts soon, so this release is about getting the system ready for dispatchers who haven't seen it before — views that make sense on first use, SMS workflows that don't need explanation, and code that won't surprise anyone with state bugs.</p>
 
                 <h2>What shipped</h2>
 
-                <p>Version 0.1.2 includes 40+ targeted improvements across dispatch workflows, communications, and infrastructure. Here's what shipped.</p>
+                <p>40+ improvements across dispatch workflows, communications, and infrastructure.</p>
 
                 <div class="blog-post__highlight">
                     <h3>Dispatch Views</h3>
@@ -134,37 +128,9 @@
                     </ul>
                 </div>
 
-                <h2>Why SMS classification matters</h2>
-
-                <p>One of the less obvious improvements in this release is SMS intent classification. When a dispatcher sends bulk offers to 30 workers, replies come back in a flood. Some are acceptances. Some are declines. Some are questions about the shift details. Others are completely unrelated messages that happened to arrive at the same time.</p>
-
-                <p>The dispatch log now classifies each incoming SMS by type and orders them according to where they sit in the dispatch pipeline. Offers that need responses surface first. Confirmations get grouped together. Irrelevant messages can be cleared with a button press instead of cluttering the action queue.</p>
-
-                <p>It's a small change in code, but it saves dispatchers from manually sorting through message threads when they're trying to fill a crew call before curtain.</p>
-
-                <h2>Code health isn't optional</h2>
-
-                <p>Adding ESLint to the project wasn't glamorous, but it was necessary. The React hooks violation it caught had been causing intermittent state bugs that were hard to reproduce. The exhaustive-deps warnings across the codebase represented dozens of places where hook dependencies weren't correctly specified — each one a potential source of stale closures or missed re-renders.</p>
-
-                <p>Fixing all of it took 10 pull requests and a lot of careful refactoring. But now the codebase has guardrails. New code gets linted before it ships, and the hooks rules catch problems before they ship.</p>
-
-                <p>Technical debt compounds. Paying it down early keeps the system maintainable.</p>
-
                 <h2>What's next</h2>
 
-                <p>Onboarding is next week. After that, the focus stays on stability — making sure the system holds up under real daily use before adding anything new.</p>
-
-                <ul>
-                    <li>Continued performance work — monitoring query times, render performance, and WebSocket reliability under load</li>
-                    <li>Edge case hardening — the kind of bugs that only show up when dispatchers use the system in ways you didn't anticipate</li>
-                    <li>Mobile polish for the worker portal — crew members interact with the system from their phones, and the experience needs to be solid</li>
-                </ul>
-
-                <p>Meanwhile, The Guild continues in preview. If you're running auditions or managing casting for a theatre company, take a look at <a href="https://www.the-guild.app/about" target="_blank" rel="noopener">the-guild.app</a>.</p>
-
-                <h2>The short version</h2>
-
-                <p>The Board v0.1.2 ships 40+ improvements to get the system onboarding-ready. Consolidated views, smarter SMS classification, real-time fixes, and a cleaner codebase. Next week, new dispatchers sit down with it for the first time.</p>
+                <p>Stability. Onboarding is next week — after that, the focus is making sure it holds up under real daily use before adding anything new.</p>
 
                 <blockquote><p>The light stays on.</p></blockquote>
             </div>
