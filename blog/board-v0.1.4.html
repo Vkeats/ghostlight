@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Board v0.1.4: Call Steward Integration — ghostlight.tech</title>
+    <meta name="description" content="Deeper Call Steward sync, bulk dispatch operations, improved SMS reliability, and roster fixes. Continuing the pre-onboarding push for IATSE Local 118.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/board-v0.1.4.html">
+    <meta property="og:title" content="The Board v0.1.4: Call Steward Integration">
+    <meta property="og:description" content="Deeper Call Steward sync, bulk dispatch operations, improved SMS reliability, and roster fixes. Continuing the pre-onboarding push for IATSE Local 118.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-03-10">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Board v0.1.4: Call Steward Integration">
+    <meta name="twitter:description" content="Deeper Call Steward sync, bulk dispatch operations, improved SMS reliability, and roster fixes. Continuing the pre-onboarding push for IATSE Local 118.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/board-v0.1.4.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#guild">Guild</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Mar 10, 2026</span>
+                <span>4 min read</span>
+            </div>
+            <h1 class="blog-post__title">The Board v0.1.4: Call Steward Integration</h1>
+
+            <div class="blog-post__content">
+                <p>v0.1.4 is out. Onboarding for Local 118 hasn't happened yet — I'm still in pre-launch preparation — but the work this cycle was focused on something specific: making The Board work alongside Call Steward, the existing system the local already runs. That meant deeper sync, better bulk operations, and continuing to fix the edges that only show up when you look closely.</p>
+
+                <h2>Context</h2>
+
+                <p>Call Steward is the job management system IATSE Local 118 currently uses. When The Board eventually goes live there, it won't be replacing Call Steward wholesale — at least not at first. Dispatchers will be working across both. So The Board needs to pull job data from CS, push assignments back, and stay in sync without clobbering anything. That's most of what this release is.</p>
+
+                <h2>What shipped</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Call Steward sync</h3>
+                    <ul>
+                        <li>Per-job pull and push sync — import a specific CS job or push assignments back by job number</li>
+                        <li>Idempotent CS push: The Board checks existing CS state before syncing, so re-running a push doesn't duplicate assignments</li>
+                        <li>Recurring weekly unavailability now pulls from CS and is also available for workers to set themselves</li>
+                        <li>Union status and dispatcher notes now sync from CS directly — no more manual entry for data that already exists there</li>
+                        <li>CS syncing badge on the UI so you can see when a sync is in progress</li>
+                        <li>Option to skip notes during a per-job pull, for cases where you want the job data without overwriting local notes</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Bulk operations</h3>
+                    <ul>
+                        <li>Assign a worker to all dates on a multi-day job from the assign modal — one action instead of repeating for each date</li>
+                        <li>Bulk removal modal for removing a worker from multiple positions at once</li>
+                        <li>Bulk notes editing from group section headers, with instant refresh and toast feedback</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>SMS reliability and workflow</h3>
+                    <ul>
+                        <li>Improved batch SMS reliability and added cancellation — you can now abort a batch in progress</li>
+                        <li>Inline offer response buttons on outgoing message bubbles so dispatchers can accept or decline on behalf of a worker without leaving the conversation</li>
+                        <li>Toggle to include position notes in the SMS notes bar, scoped per send</li>
+                        <li>Position-filtered PPE via global per-skill defaults — the right PPE requirements go to the right workers automatically</li>
+                        <li>Auto-enable date grouping for multi-day job offers, deduplicated position notes, and positions sorted by start time within the same date</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Roster and availability</h3>
+                    <ul>
+                        <li>Skill filter on the roster is now multi-select with checkboxes — filter by multiple skills at once</li>
+                        <li>CSV export in the legacy calling sheet format, with offer sent timestamps in the Date and Time columns</li>
+                        <li>Timeline filtered to show only skill-matched positions for a given worker</li>
+                        <li>Scroll position preserved when opening and closing the worker detail and conversation panels</li>
+                        <li>Hide-unavailable toggle decoupled from offer policy so each behaves independently</li>
+                    </ul>
+                </div>
+
+                <p>Alongside the features: 30+ bug fixes. Overnight shift edge cases in bulk assignment, webhook echo deduplication in the SMS conversation view, idempotency edge cases in CS push, missing database columns, cursor-jumping in spreadsheet notes, and a broken dispatcher invite flow that had been quietly failing. Nothing dramatic, just the kind of thing that accumulates when you're building fast.</p>
+
+                <h2>Why it matters</h2>
+
+                <p>The CS integration work is what makes onboarding realistic. A dispatcher isn't going to switch to a new tool and re-enter everything by hand. If The Board can pull the jobs that already exist in CS, sync the roster data that's already there, and push assignments back without duplicating them — that's a much lower bar to clear on day one.</p>
+
+                <p>The bulk operations are in the same category. Dispatching a multi-day run means touching the same workers across multiple dates. Doing that one position at a time isn't viable. These are the kinds of things that feel minor until someone's actually using the tool in production.</p>
+
+                <h2>What's next</h2>
+
+                <p>Still preparing for Local 118's onboarding. I'm working through the remaining gaps in the CS integration — there are edge cases I won't know about until it runs against their real data. I'm also continuing to improve the SMS layer, which is the core of how dispatch communication works. More on both of those in the next cycle.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>
