@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/blog/first-release",
+      "destination": "/blog/board-v0.1.1",
+      "permanent": true
+    }
+  ]
+}
