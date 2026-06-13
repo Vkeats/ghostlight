@@ -8,9 +8,21 @@
   </url>
   <url>
     <loc>https://ghostlight.tech/blog/</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ghostlight.tech/blog/ghostlight-v0.1.2.html</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ghostlight.tech/blog/board-v0.1.5.html</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ghostlight.tech/blog/board-v0.1.4.html</loc>

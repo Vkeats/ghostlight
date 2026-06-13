@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghostlight v0.1.2: Audition Day, Scheduler Overhaul, Cast Board — ghostlight.tech</title>
+    <meta name="description" content="A dedicated audition-day module, a rebuilt scheduler with drag-and-drop and conflict detection, cast board preview with poster export, and a round of auth and reliability hardening.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/ghostlight-v0.1.2.html">
+    <meta property="og:title" content="Ghostlight v0.1.2: Audition Day, Scheduler Overhaul, Cast Board">
+    <meta property="og:description" content="A dedicated audition-day module, a rebuilt scheduler with drag-and-drop and conflict detection, cast board preview with poster export, and a round of auth and reliability hardening.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-06-12">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ghostlight v0.1.2: Audition Day, Scheduler Overhaul, Cast Board">
+    <meta name="twitter:description" content="A dedicated audition-day module, a rebuilt scheduler with drag-and-drop and conflict detection, cast board preview with poster export, and a round of auth and reliability hardening.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/ghostlight-v0.1.2.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#ghostlight">Ghostlight</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Jun 12, 2026</span>
+                <span>6 min read</span>
+            </div>
+            <h1 class="blog-post__title">Ghostlight v0.1.2: Audition Day, Scheduler Overhaul, Cast Board</h1>
+
+            <div class="blog-post__content">
+                <p>v0.1.2 is the biggest update to the casting app since the initial build. A dedicated audition-day module, a ground-up rethink of the callback scheduler, and a cast board preview tool that generates Instagram-ready posters. Also: The Guild is now simply Ghostlight, living at <a href="https://app.ghostlight.tech">app.ghostlight.tech</a>. Same product, cleaner name.</p>
+
+                <h2>What this is</h2>
+
+                <p>Ghostlight is a casting and audition management tool for theatre companies. Casting directors use it to post calls, collect submissions, schedule audition sessions, and run callbacks. Actors use it to submit for roles, track their calls, and receive invites. It's in preview — I'm building it in the open and working through the rough edges as real usage surfaces them.</p>
+
+                <h2>What shipped</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Audition day</h3>
+                    <ul>
+                        <li>New day-of audition module with a three-panel in-room layout: call sheet on one side, actor detail in the middle, controls on the right</li>
+                        <li>Running order separated from the planned schedule — reorder the call sheet on the day without touching the original session plan</li>
+                        <li>Touch-friendly call-sheet reordering via up/down controls for tablet use in the room</li>
+                        <li>Full actor profile visible in the in-room view — credits, representation, contact — without navigating away</li>
+                        <li>Representation shown above contact in the in-room panel; copy-to-clipboard for actor email</li>
+                        <li>Call-sheet actor numbering persists across breaks so a scheduled break doesn't skip a number</li>
+                        <li>Optimistic, race-free call-sheet reorder saves — changes feel instant and don't conflict under fast edits</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Callback scheduler</h3>
+                    <ul>
+                        <li>Rebuilt scheduler with a desktop sidebar, side-by-side slot actors, and a unified actor surface across mobile and desktop</li>
+                        <li>Drag actors from a carousel into time slots; mobile gets a floating actor card that drags to a slot</li>
+                        <li>Conflict-warning triangle on carousel headshots when an actor has a scheduling conflict</li>
+                        <li>Cross-session actor awareness — the scheduler knows if an actor is already placed in another session</li>
+                        <li>Callback scoping: mark callbacks per role and filter the scheduler to only called-back actors for a given role</li>
+                        <li>Slot overview strip with adaptive-density slot rows and relative timestamps on assignment status pills</li>
+                        <li>Confirm prompt before resending a callback invite to avoid accidental duplicate sends</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Cast board and poster tools</h3>
+                    <ul>
+                        <li>Cast board preview: arrange the shortlisted pool into a visual board with headshots, role labels, and background color options</li>
+                        <li>Auto-generate an Instagram-ready cast announcement poster with actor headshots and role credits</li>
+                        <li>Canva-like text layer with board fonts, gradient backgrounds, textured overlays, and marker font options</li>
+                        <li>Card formations — auto-arrange cast cards into layout presets rather than placing them one by one</li>
+                        <li>Pool search and role filter on the cast board so large casts stay manageable</li>
+                        <li>Export the board or individual headshots directly from the preview</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Submissions and invites</h3>
+                    <ul>
+                        <li>Inline invite editor at send time replaces variable-based templates — edit the message directly before sending, no template management needed</li>
+                        <li>Default audition prep message configurable per production and editable from the scheduler at send time</li>
+                        <li>Producer-initiated actor submissions: casting directors can add an actor to a call directly from the auditions panel</li>
+                        <li>Casting overview panel on submissions with role chips that filter the list to shortlisted actors for that role</li>
+                        <li>Withdrawn submissions excluded from production dashboard counts and session actor pools</li>
+                        <li>Submission deadline now stays open through end-of-day rather than closing at midnight exactly</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Auth, email, and reliability</h3>
+                    <ul>
+                        <li>Emails normalized to lowercase for case-insensitive login — no more lockouts from capitalization mismatches</li>
+                        <li>Current password required to change account email</li>
+                        <li>Email send tracking with admin retry and Resend rate-limit handling — invite batches throttled and retried on failure</li>
+                        <li>Admin routes server-side gated; company membership required to create productions</li>
+                        <li>Headshot thumbnails routed through Supabase transforms for proper aspect-ratio resizing and reduced egress</li>
+                        <li>In-app support ticket threads with email chain — reply from email, it appears in the ticket</li>
+                    </ul>
+                </div>
+
+                <p>Total scope: 60+ features and 70+ bug fixes across the audition-day module, scheduler, cast tools, auth layer, and image pipeline. A lot of the fixes are small but the cumulative effect on usability is significant.</p>
+
+                <h2>Why it matters</h2>
+
+                <p>The audition-day module is the piece I've been working toward for a while. Casting software tends to be good at the prep phase — organizing submissions, building schedules — and then leaves you on your own on the actual day. This release closes that gap. The call sheet is live, reorderable, and connected to the full actor record without any context switching.</p>
+
+                <p>The scheduler rebuild is probably the most technically dense work in this release. Drag-and-drop across carousel, floating card, and slot targets is genuinely hard to get right on both desktop and mobile. The conflict detection and cross-session awareness make it usable for real multi-session callbacks, not just single-session scheduling.</p>
+
+                <p>The cast board is newer territory. Theatre companies spend real time putting together cast announcements — usually in Canva or Photoshop, manually. Having a tool that pulls from the actual casting data and generates something shareable in a few clicks is the kind of thing that's hard to explain in a feature list but immediately obvious the first time you use it.</p>
+
+                <h2>What's next</h2>
+
+                <p>The audition-day module has the bones in place; I want to add more in-room tooling before calling it done — notes, quick ratings, and a smoother handoff from the session to the callback list. The scheduler needs more polish on edge cases, particularly around multi-role actors and overlapping sessions. And I'm continuing to work through the reliability layer: email delivery tracking, headshot performance, and auth edge cases all had significant attention this cycle and there's more to do.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>
