@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghostlight v0.1.3: Meet Ghostlight AI — ghostlight.tech</title>
+    <meta name="description" content="Ghostlight AI turns a show title into a complete, editable audition call — full role breakdown included. Plus a finalized cast contact sheet with CSV/print export, submission search, and a round of invite and access fixes.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/ghostlight-v0.1.3.html">
+    <meta property="og:title" content="Ghostlight v0.1.3: Meet Ghostlight AI">
+    <meta property="og:description" content="Ghostlight AI turns a show title into a complete, editable audition call — full role breakdown included. Plus a finalized cast contact sheet with CSV/print export, submission search, and a round of invite and access fixes.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-06-30">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ghostlight v0.1.3: Meet Ghostlight AI">
+    <meta name="twitter:description" content="Ghostlight AI turns a show title into a complete, editable audition call — full role breakdown included. Plus a finalized cast contact sheet with CSV/print export, submission search, and a round of invite and access fixes.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/ghostlight-v0.1.3.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#ghostlight">Ghostlight</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Jun 30, 2026</span>
+                <span>5 min read</span>
+            </div>
+            <h1 class="blog-post__title">Ghostlight v0.1.3: Meet Ghostlight AI</h1>
+
+            <div class="blog-post__content">
+                <p>The headline of v0.1.3 is <strong>Ghostlight AI</strong> — a chat-driven assistant that turns "we're putting on <em>Avenue Q</em>" into a complete, publishable audition call. Alongside it: a finalized cast contact sheet, name/email search on submissions, and a round of fixes to invitation delivery, access scoping, and signup edge cases that surfaced as the app saw more real use.</p>
+
+                <h2>What this is</h2>
+
+                <p>Ghostlight is a casting and audition management tool for theatre companies — in preview, actively developed. Casting directors use it to post calls, collect actor submissions, run callbacks, and manage the production team. v0.1.2 shipped the big structural pieces: the audition-day module, the rebuilt scheduler, the cast board. v0.1.3 makes posting a call dramatically faster, and tightens the collaboration and access paths around it.</p>
+
+                <h2>Ghostlight AI</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>From "we're doing this show" to a published call</h3>
+                    <p>Setting up an audition call means filling in a lot of fields: the production details, the schedule, and a full role breakdown — every character, with descriptions, types, and age ranges. Ghostlight AI does the first draft for you. Tell it the show you're casting, and it interviews you for the essentials, then pre-fills the whole thing into an editable live preview. You tweak whatever you want and hit Publish.</p>
+                    <p>It knows the difference between a straight play and a musical, asks for a playwright or a composer accordingly, and writes real character descriptions rather than placeholders. Already have a breakdown? Paste it in and the assistant parses it straight into the draft instead of re-interviewing you — so an existing casting call becomes a Ghostlight posting in one step.</p>
+                    <p>Ghostlight AI runs on Claude Opus 4.8. Like any assistant, it can make mistakes — everything it produces lands in an editable preview you review before anything goes live, so you're always the one publishing the call.</p>
+                </div>
+
+                <h2>Casting workflow</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Contact sheet and submission search</h3>
+                    <ul>
+                        <li>Cast contact sheet is finalized — export to CSV or send to print directly from the cast view</li>
+                        <li>Name and email search on the submission list, so finding a specific actor in a large pool doesn't require scrolling</li>
+                        <li>Duplicate submission prevention, with an actor-facing status message so they know their submission is already in</li>
+                    </ul>
+                </div>
+
+                <h2>Collaboration and access</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Invitations that actually arrive</h3>
+                    <ul>
+                        <li>Smoother no-account flow for production invitees — someone who doesn't have a Ghostlight account can now accept a production invite without friction</li>
+                        <li>Production team-invite emails now actually send (they were silently failing in certain cases)</li>
+                        <li>Email failures on team invites are now surfaced to the sender, with a resend option</li>
+                        <li>Production invites are acceptable after sign-in — the invite link now works correctly even if the recipient signs in first</li>
+                        <li>"Use a different account" on the invite acceptance screen now actually signs the current user out before proceeding</li>
+                    </ul>
+                </div>
+
+                <div class="blog-post__highlight">
+                    <h3>Access and accounts</h3>
+                    <ul>
+                        <li>Productions are now scoped to their assigned members only, not everyone at the company — a fix that matters as more people are added to an organization</li>
+                        <li>Re-signup on an email held by a soft-deleted account now works correctly instead of blocking with a confusing error</li>
+                    </ul>
+                </div>
+
+                <h2>Why it matters</h2>
+
+                <p>The blank-page problem is real. Posting an audition call is the moment a production becomes public, and the friction of filling in every field — especially a full role breakdown — is enough to stall it. Ghostlight AI collapses that into a conversation and an edit pass, which is the difference between "I'll set it up this weekend" and "it's live." Letting you paste an existing breakdown matters just as much: most companies already have one written somewhere, and now that work carries straight over.</p>
+
+                <p>The contact sheet is one of those things that feels small until you need it. At the end of a casting process, you want a clean list of your cast with contact info — something you can drop into an email or hand to a stage manager. Having that export built in, pulling directly from the data already in the system, saves a step that was previously happening in a spreadsheet on the side.</p>
+
+                <p>The invite fixes took more work than they look like. The no-account flow for production invitees covers a real gap: not everyone on a production team has a Ghostlight account, and the old flow made joining unnecessarily awkward. The silent email failures were the more embarrassing issue — invites appearing to send but not arriving. Those are fixed, and failures are now visible so they can be retried. The access-scoping fix is quieter but important: it's the kind of thing that's fine at small scale and becomes a problem as soon as a second production is running alongside the first.</p>
+
+                <h2>What's next</h2>
+
+                <p>The in-room audition tooling still has room to grow — notes, quick ratings, and a cleaner handoff from session to callback list are on the list. I also want to continue tightening the invite and onboarding paths; this release fixed the most visible failures, but the full collaborator experience still has rough edges. The submission search shipped here as a simple name/email filter; there's more to do on the filtering and sorting side as submission volumes grow.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>
