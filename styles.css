@@ -19,6 +19,9 @@
     --guild-gold: #f0a500;
     --guild-gold-fade: rgba(240, 165, 0, 0.1);
     --guild-gold-border: rgba(240, 165, 0, 0.3);
+    --tally-red: #ff4d4d;
+    --tally-red-fade: rgba(255, 77, 77, 0.1);
+    --tally-red-border: rgba(255, 77, 77, 0.3);
     --chrome: #e0e0e8;
     --steel: #a8a8b8;
     --rust: #5a5a6e;
@@ -413,6 +416,15 @@ header {
     --product-fade: var(--neon-blue-fade);
     --product-border: var(--neon-blue-border);
     --border-gradient: linear-gradient(90deg, var(--neon-blue), var(--guild-gold), var(--neon-blue));
+}
+
+/* booth's own UI is warm paper rather than neon, so its card borrows the
+   red of a live tally light — the one thing the two palettes share. */
+.product--booth {
+    --product-color: var(--tally-red);
+    --product-fade: var(--tally-red-fade);
+    --product-border: var(--tally-red-border);
+    --border-gradient: linear-gradient(90deg, var(--tally-red), var(--guild-gold), var(--tally-red));
 }
 
 .product {
