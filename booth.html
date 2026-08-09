@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>booth — pass ACX the first time</title>
+    <meta name="description" content="An audiobook narration studio that runs on your own machine. Teleprompter, accuracy checking, repair and ACX mastering — your recordings never leave the room.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostlight.tech/booth">
+    <meta property="og:title" content="booth — pass ACX the first time">
+    <meta property="og:description" content="An audiobook narration studio that runs on your own machine. Teleprompter, accuracy checking, repair and ACX mastering — your recordings never leave the room.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="booth — pass ACX the first time">
+    <meta name="twitter:description" content="An audiobook narration studio that runs on your own machine.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/booth">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="booth.css">
+    <script src="main.js" defer></script>
+    <!-- set the theme before first paint, same as the home page, or the
+         page flashes dark on a light-theme visitor -->
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <span class="logo__line logo__line--top">
+                <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+            </span>
+            <span class="logo__line logo__line--bottom">
+                <span class="logo__text--light">light</span>
+            </span>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="/#ghostlight">Ghostlight</a>
+            <a href="/#board">Board</a>
+            <a href="/#about">About</a>
+            <a href="blog/">Blog</a>
+        </nav>
+    </header>
+
+    <section class="hero booth-hero">
+        <p class="booth-kicker">booth</p>
+        <h2 class="hero__title">Pass ACX the <span class="hero__art">first</span> time.</h2>
+        <p class="hero__subtitle">
+            A narration studio that reads along while you record, finds every
+            misread, repairs the line, and masters to ACX spec — on your own
+            machine, with nothing leaving the room.
+        </p>
+    </section>
+
+    <main class="booth-main">
+
+        <!-- the demo carries the argument; it is real footage of the app -->
+        <section class="card booth-demo" aria-labelledby="demo-h">
+            <h3 id="demo-h" class="booth-h">Sixty seconds, start to finish</h3>
+            <video class="booth-video" controls preload="metadata"
+                   poster="assets/booth-poster.png" playsinline
+                   aria-label="booth being used from recording to ACX-mastered file">
+                <source src="assets/booth-demo.mp4" type="video/mp4">
+                <source src="assets/booth-demo.webm" type="video/webm">
+                Your browser can't play this video.
+                <a href="assets/booth-demo.mp4">Download it instead</a>.
+            </video>
+            <p class="booth-note">
+                Recorded from the running app. The 99.3% is a real
+                transcription score, the flagged misread is one booth found,
+                and the three ACX checks are measurements of the file it
+                produced. Nothing in it is mocked up.
+            </p>
+        </section>
+
+        <section class="booth-why" aria-labelledby="why-h">
+            <h3 id="why-h" class="booth-h">Why this exists</h3>
+            <p class="booth-lede">
+                ACX rejects a book for three numbers: RMS between −23 and −18 dB,
+                peaks no louder than −3 dB, and a noise floor under −60 dB. You
+                find out days after you upload, and the fix is usually re-recording.
+            </p>
+            <div class="booth-grid">
+                <article class="card booth-item">
+                    <h4>It reads along</h4>
+                    <p>Words tint green a second behind you as they're confirmed.
+                    Anything you misread lands in the gutter with a timestamp —
+                    never inline, so the line you're about to read stays clean.</p>
+                </article>
+                <article class="card booth-item">
+                    <h4>Fix one line, not the chapter</h4>
+                    <p>Punch-in: re-read the sentence and booth splices it back
+                    where it belongs, matched on word anchors and cut at silences.</p>
+                </article>
+                <article class="card booth-item">
+                    <h4>It checks before ACX does</h4>
+                    <p>The same measurements ACX runs, on your file, before you
+                    upload. Including the one most tools miss — mastering lifts
+                    your room floor along with your voice.</p>
+                </article>
+                <article class="card booth-item">
+                    <h4>Nothing leaves the room</h4>
+                    <p>Transcription runs on your machine. No account, no upload,
+                    no cloud. Your unpublished manuscript stays yours.</p>
+                </article>
+                <article class="card booth-item">
+                    <h4>It knows the names</h4>
+                    <p>An invented name reads back as a misread in every chapter
+                    it appears in. Teach it once and chapter twenty agrees with
+                    chapter three.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="card booth-get" id="get" aria-labelledby="get-h">
+            <h3 id="get-h" class="booth-h">Private beta</h3>
+            <p class="booth-lede">
+                booth is in beta with a small group of narrators, macOS
+                first. Builds go out once they're signed and notarized, so it
+                opens like any other app — no security warnings to click
+                through. Windows follows.
+            </p>
+            <form class="contact-form booth-form" data-formspree="xblnenyb" method="POST" aria-label="Request a beta invite">
+                <input type="hidden" name="subject" value="booth beta request">
+                <div class="contact-form__row">
+                    <span class="contact-form__prompt" aria-hidden="true">*&nbsp;</span>
+                    <input type="email" name="email" class="contact-form__input" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+                </div>
+                <div class="contact-form__row">
+                    <span class="contact-form__prompt" aria-hidden="true">&gt;&nbsp;</span>
+                    <input type="text" name="message" class="contact-form__input" placeholder="What are you narrating?" required autocomplete="off" aria-label="What are you narrating">
+                    <button type="submit" class="contact-form__submit" aria-label="Request an invite">↵</button>
+                </div>
+            </form>
+            <p class="booth-note">
+                Tell me what you're working on and I'll send a build. I read
+                every one of these — booth sends me nothing, so what you tell
+                me is all I know.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">© 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>

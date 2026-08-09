@@ -1,0 +1,104 @@
+/* booth's product page.
+   Layers on styles.css rather than replacing it: same tokens, same cards,
+   same theme toggle. The one new colour is the tally red the product card
+   on the home page already uses — booth's own UI is warm paper, and the
+   record light is the only thing the two palettes share. */
+
+.booth-hero {
+    padding-bottom: 1rem;
+}
+
+.booth-kicker {
+    font-family: var(--font-mono, 'Share Tech Mono', monospace);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--tally-red);
+    margin: 0 0 0.6rem;
+}
+
+.booth-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.booth-h {
+    font-size: 1.15rem;
+    margin: 0 0 0.9rem;
+    color: var(--chrome);
+}
+
+.booth-lede {
+    color: var(--steel);
+    line-height: 1.65;
+    max-width: 62ch;
+    margin: 0 0 1.5rem;
+}
+
+.booth-note {
+    color: var(--steel);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 62ch;
+    margin: 1rem 0 0;
+}
+
+/* the video is the argument, so it gets the room and the accent */
+.booth-demo {
+    --product-color: var(--tally-red);
+    --product-fade: var(--tally-red-fade);
+    --product-border: var(--tally-red-border);
+    padding: 1.6rem;
+}
+
+.booth-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--tally-red-border);
+    background: #000;
+}
+
+.booth-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.1rem;
+}
+
+.booth-item {
+    padding: 1.3rem;
+}
+
+.booth-item h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: var(--tally-red);
+}
+
+.booth-item p {
+    margin: 0;
+    color: var(--steel);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.booth-get {
+    --product-color: var(--tally-red);
+    --product-fade: var(--tally-red-fade);
+    --product-border: var(--tally-red-border);
+    padding: 1.6rem;
+}
+
+.booth-form {
+    max-width: 34rem;
+}
+
+@media (max-width: 640px) {
+    .booth-main { padding: 0 1rem 3rem; gap: 1.8rem; }
+    .booth-demo, .booth-get { padding: 1.1rem; }
+}
