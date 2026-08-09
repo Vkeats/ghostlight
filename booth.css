@@ -102,3 +102,10 @@
     .booth-main { padding: 0 1rem 3rem; gap: 1.8rem; }
     .booth-demo, .booth-get { padding: 1.1rem; }
 }
+
+/* the line the whole page turns on */
+.booth-line {
+    font-size: 1.15rem;
+    color: var(--chrome);
+    margin-top: 1.4rem;
+}
