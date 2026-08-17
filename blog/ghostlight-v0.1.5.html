@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghostlight v0.1.5: Audition Day — ghostlight.tech</title>
+    <meta name="description" content="Audition day is the release: drag actors between slots without unbooking them, reschedules that stay visible until they're settled, a door check-in view, and multi-company teams that finally behave. Plus a long run of security fixes.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/ghostlight-v0.1.5.html">
+    <meta property="og:title" content="Ghostlight v0.1.5: Audition Day">
+    <meta property="og:description" content="Audition day is the release: drag actors between slots without unbooking them, reschedules that stay visible until they're settled, a door check-in view, and multi-company teams that finally behave. Plus a long run of security fixes.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-08-17">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ghostlight v0.1.5: Audition Day">
+    <meta name="twitter:description" content="Audition day is the release: drag actors between slots without unbooking them, reschedules that stay visible until they're settled, a door check-in view, and multi-company teams that finally behave. Plus a long run of security fixes.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/ghostlight-v0.1.5.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#ghostlight">Ghostlight</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Aug 17, 2026</span>
+                <span>4 min read</span>
+            </div>
+            <h1 class="blog-post__title">Ghostlight v0.1.5: Audition Day</h1>
+
+            <div class="blog-post__content">
+                <p>v0.1.4 turned the production page into a casting pipeline. v0.1.5 is about the day the pipeline is <em>for</em>: the sessions themselves. You can now drag actors between slots without unbooking them, a reschedule request stays in view until it's actually settled, and there's a check-in view for whoever is working the door. Around that, teams that span more than one company finally behave, invitations stop losing people, and there's a long run of security fixes I'll be honest about below.</p>
+
+                <h2>What this is</h2>
+
+                <p>Ghostlight is casting and audition management for theatre companies — in preview, with real productions casting through it. This cycle was also the first time more than one company was casting on it at once — the first real multi-tenant test — which is why so much of the release is about teams, invitations, and who can see what. It went well. No fires so far, and I'm saying "so far" on purpose.</p>
+
+                <h2>Scheduling that survives contact with actors</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Move people, not bookings</h3>
+                    <ul>
+                        <li>Drag a scheduled actor from one slot to another without removing them first — the page auto-scrolls while you drag, and there's a "move to another slot" picker for when dragging is the wrong tool</li>
+                        <li>Click an unbooked actor, click a slot, done — no drag required</li>
+                        <li>A slot locks while an invite is out for it, so you can't move someone whose confirmation is in flight; if you move a confirmed actor, the stale-time chip resends the invite with the new time in one click</li>
+                        <li>Reschedule requests now show up everywhere staff look — as badges on the slot, in the offered times, in the actor carousel — and the badge clears itself only when the replacement invite is confirmed</li>
+                        <li>The day-of running order follows scheduler moves, so NEXT never shows an order the scheduler abandoned</li>
+                    </ul>
+                </div>
+
+                <h2>Running the day</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>The door, the room, and the sheet</h3>
+                    <ul>
+                        <li>A door check-in view, plus day-of entry points into NEXT from the production page and a send-in-now banner when the room is ready</li>
+                        <li>RSVP status on the live NEXT view — you can see who confirmed before you call their name</li>
+                        <li>A production-wide contact sheet: every actor you're seeing across every session, with attendance</li>
+                        <li>Empty screens now teach the next step instead of sitting there — share the link, schedule a session — because "no submissions yet" is a moment people quit</li>
+                    </ul>
+                </div>
+
+                <h2>Companies, teams, and invitations</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Who you are, and who you're acting for</h3>
+                    <ul>
+                        <li>People who work with more than one company can see which one they're acting for and switch — and the choice survives the browser, the tab, and the next sign-in</li>
+                        <li>Pending company invitations are listed with resend and cancel; someone who already has an account gets pointed straight at their waiting invitation</li>
+                        <li>The invite form now says what Member and Company Admin actually let a person do</li>
+                        <li>Production invites grant access to that production only — not membership in the company — and company invite links now actually grant membership (they didn't; sorry)</li>
+                        <li>A persistent desktop sidebar for moving around the pipeline</li>
+                    </ul>
+                </div>
+
+                <h2>For actors</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Small things that were annoying</h3>
+                    <ul>
+                        <li>Breakdown cards are the role selector on the audition page, with highlights where your profile matches what the role asks for</li>
+                        <li>If your profile is missing materials a call needs, you're told at the top of the page — not after you submit</li>
+                        <li>You can't be handed an audition link before the call is published, and withdrawing works on the mobile submission view again</li>
+                        <li>Reschedule request emails now include your address so the company can reply to you directly</li>
+                    </ul>
+                </div>
+
+                <h2>Under the hood</h2>
+
+                <p>This release carries a run of security fixes: authorization is now decided by access to the production rather than membership in a company, a handful of cross-tenant paths in file storage, roster and submission review are closed, row-level security covers more tables, storage policies are tighter, and rate limits fail closed when the limiter is down. Failed logins, lockouts, and rate-limit hits are written to the activity log; error tracking is wired up; reschedule and withdrawal emails record their send attempts so a lost email is a fact I can look up rather than a mystery. I've fixed everything I can find, and I keep looking — that's the honest version, not "the system is secure."</p>
+
+                <p>All told, about eighty-five distinct changes since v0.1.4.</p>
+
+                <h2>Why it matters</h2>
+
+                <p>Multi-tenant is a milestone that doesn't look like one: nothing new appears, things simply keep working while more people use them. Most of the access and invitation fixes above came out of watching real companies overlap for the first time, and I'd rather they were boring than clever.</p>
+
+                <p>Auditions are the part of casting where the software is in the room with people who are nervous, running late, and looking at a phone. Nothing here is a headline feature; it's the difference between a tool that looks right in a demo and one you'd trust with a Saturday of forty actors. Moving someone without unbooking them, seeing that a reschedule is still open, knowing who's checked in — those are the moments where admin either disappears or takes over the day.</p>
+
+                <h2>What's next</h2>
+
+                <p>Preview deployments are moving onto their own database so preview links are safe to hand around. After that: an admin view of security events, moving and cloning whole sessions in the scheduler, and a decision on when the per-production pricing that's been sitting dormant actually goes live. The Casting stage — offers and a final cast list — is still behind the curtain; it stays there until it's a real flow.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>
