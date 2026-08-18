@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Board — dispatch augmentation, retired</title>
+<meta name="description" content="Dispatch augmentation for a 3,700-member film-industry union local. Built, shipped, and operated solo through a 90-day paid pilot. Retired. This page is its record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12161c;        /* house dark, work-lights off */
+    --panel:#1a212a;      /* road-case panel */
+    --line:#2c3540;
+    --paper:#e9e4d8;      /* call-sheet paper */
+    --dim:#939aa5;
+    --amber:#e8a33d;      /* tungsten warn light */
+    --filled:#8fb98b;     /* position filled */
+    --display:"Barlow Condensed", "Arial Narrow", sans-serif;
+    --body:"IBM Plex Sans", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--paper);font:400 17px/1.65 var(--body)}
+  a{color:var(--amber)}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* status bar */
+  .status{border-bottom:1px solid var(--line);font:500 13px/1 var(--mono);letter-spacing:.08em}
+  .status .wrap{display:flex;justify-content:space-between;padding:14px 24px}
+  .status .tag{color:var(--amber)}
+
+  /* hero */
+  header.hero{padding:88px 0 64px;border-bottom:1px solid var(--line)}
+  .log{font:400 14px/2 var(--mono);color:var(--dim);margin-bottom:40px;max-width:520px}
+  .log b{color:var(--paper);font-weight:500}
+  .log .t{color:var(--amber);margin-right:1em}
+  .log div{opacity:0;animation:line .3s forwards}
+  .log div:nth-child(1){animation-delay:.15s}
+  .log div:nth-child(2){animation-delay:.75s}
+  .log div:nth-child(3){animation-delay:1.5s}
+  @keyframes line{to{opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    .log div{animation:none;opacity:1}
+    html{scroll-behavior:auto}
+  }
+  h1{font:600 clamp(52px,9vw,92px)/0.95 var(--display);text-transform:uppercase;letter-spacing:.01em}
+  .sub{margin-top:24px;max-width:620px;font-size:19px;color:var(--paper)}
+  .sub .muted{color:var(--dim)}
+
+  /* stamp */
+  .stamp{display:inline-block;margin-top:32px;padding:6px 14px;border:2px solid var(--amber);color:var(--amber);
+    font:600 15px/1 var(--display);text-transform:uppercase;letter-spacing:.28em;transform:rotate(-2deg)}
+
+  /* sections */
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font:500 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:18px}
+  h2{font:600 clamp(30px,4.5vw,42px)/1.05 var(--display);text-transform:uppercase;margin-bottom:28px}
+  p.lede{max-width:640px;color:var(--dim)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:36px}
+  .stat{background:var(--panel);padding:22px 20px}
+  .stat .n{font:600 clamp(30px,4vw,40px)/1 var(--display);color:var(--paper)}
+  .stat .l{margin-top:8px;color:var(--dim);font-size:14px;line-height:1.4}
+  .src{display:block;margin-top:10px;font:400 11px/1.4 var(--mono);color:#5d6670}
+
+  /* head-to-head call sheet */
+  .sheet{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+  .sheet>div{background:var(--panel);padding:26px 24px}
+  .sheet h3{font:600 22px/1.1 var(--display);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+  .sheet .when{font:400 12px/1 var(--mono);color:var(--dim);margin-bottom:20px;display:block}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px dashed var(--line);font-size:15px}
+  .row span:first-child{color:var(--dim)}
+  .row span:last-child{font-family:var(--mono);font-size:14px}
+  .verdict{margin-top:18px;padding:10px 12px;font:500 13px/1.45 var(--mono)}
+  .v-bad{background:#3a2626;color:#e0a1a1}
+  .v-good{background:#263a2a;color:var(--filled)}
+  .board h3,.board .row span:last-child{color:var(--amber)}
+  /* time bars */
+  .bars{margin-top:22px}
+  .bars .bar{height:14px;background:var(--amber);margin:6px 0 14px;transform-origin:left;width:var(--w)}
+  .bars .manual{background:#6b7480}
+  .bars label{font:400 12px/1 var(--mono);color:var(--dim)}
+  @media (max-width:640px){.sheet{grid-template-columns:1fr}}
+
+  /* capabilities */
+  ul.caps{margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 32px;list-style:none}
+  ul.caps li{padding:14px 0 14px 0;border-top:1px dashed var(--line);color:var(--paper);font-size:15.5px}
+  ul.caps li em{display:block;font-style:normal;color:var(--dim);font-size:13.5px;margin-top:4px}
+
+  /* arc */
+  .arc p{max-width:640px;margin-bottom:18px}
+  .arc .mono{font-family:var(--mono);font-size:14px;color:var(--dim)}
+
+  footer{padding:48px 0 72px;color:var(--dim);font-size:14px}
+  footer .prov{font:400 12.5px/1.7 var(--mono);border-left:2px solid var(--amber);padding-left:14px;max-width:560px;margin-bottom:28px}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="status"><div class="wrap"><span>THE&nbsp;BOARD</span><span class="tag">STATUS: RETIRED · 2026</span></div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="log" aria-label="dispatch log excerpt">
+    <div><span class="t">05:58</span>venue requests <b>10 carpenters</b> — same-day call</div>
+    <div><span class="t">06:02</span>calling through <b>292 members</b>…</div>
+    <div><span class="t">06:14</span><b>6 confirmed.</b> Sheets updated. Dispatcher still asleep.</div>
+  </div>
+  <h1>The Board</h1>
+  <p class="sub">Dispatch augmentation for a 3,700-member film-industry union local.
+  Built by the dispatcher who used it. <span class="muted">One person wrote it, ran it, and dispatched real shows through it for a 90-day paid pilot — then retired it. This page is its record.</span></p>
+  <span class="stamp">Pilot complete · Paid in full</span>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">The record</div>
+  <h2>Verified numbers, nothing else</h2>
+  <p class="lede">Every figure below traces to database records or sent invoices. Nothing here is projected, extrapolated, or rounded up.</p>
+  <div class="stats">
+    <div class="stat"><span class="n">3,745</span><div class="l">workers under management</div><span class="src">db-verified</span></div>
+    <div class="stat"><span class="n">132,564</span><div class="l">skill records</div><span class="src">db-verified</span></div>
+    <div class="stat"><span class="n">95.8%</span><div class="l">fill rate across 25 shows, run solo</div><span class="src">pilot record</span></div>
+    <div class="stat"><span class="n">15,610</span><div class="l">SMS offers &amp; confirmations in one month — 453 members, 10 venues</div><span class="src">db-verified</span></div>
+    <div class="stat"><span class="n">0</span><div class="l">dispatch, offer, or recall errors</div><span class="src">reported to client, april 2026</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The centerpiece</div>
+  <h2>Same show, same dispatcher, same week</h2>
+  <p class="lede">Show #11386 was dispatched twice in one week — first by hand, then through The Board. The only variable was the mechanism.</p>
+  <div class="sheet">
+    <div>
+      <h3>Manual</h3><span class="when">May 19–20 · phone &amp; spreadsheet</span>
+      <div class="row"><span>Worker contacts</span><span>54</span></div>
+      <div class="row"><span>Position-offers</span><span>200</span></div>
+      <div class="row"><span>Active calling time</span><span>3h 25m</span></div>
+      <div class="verdict v-bad">27 positions unfilled on show morning</div>
+    </div>
+    <div class="board">
+      <h3>The Board</h3><span class="when">May 21–22 · bundled SMS</span>
+      <div class="row"><span>Worker contacts</span><span>133</span></div>
+      <div class="row"><span>Position-offers</span><span>394</span></div>
+      <div class="row"><span>Active calling time</span><span>36m</span></div>
+      <div class="verdict v-good">Fully filled by next morning</div>
+    </div>
+  </div>
+  <div class="bars" aria-hidden="true">
+    <label>3h 25m manual</label>
+    <div class="bar manual" style="--w:100%"></div>
+    <label>36m with The Board</label>
+    <div class="bar" style="--w:17.6%"></div>
+  </div>
+  <p class="lede" style="margin-top:26px">And the part with no manual equivalent: <strong style="color:var(--paper)">35 standby workers reached across 5 positions in 8 minutes 19 seconds</strong> — timestamps in the database.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">What it did</div>
+  <h2>Built for the worst morning of the week</h2>
+  <ul class="caps">
+    <li>One-click calling sheets<em>from 5–45 minutes of setup to a single action, any show size</em></li>
+    <li>Bundled SMS dispatch<em>offers, confirmations, and recalls with inline response buttons</em></li>
+    <li>Two-way legacy sync<em>idempotent push/pull against the incumbent steward system — zero date/time mismatches</em></li>
+    <li>Skill-matrix exports<em>a venue's 31 skill lists: an hour of compiling, done in one click</em></li>
+    <li>Per-skill PPE defaults<em>wardrobe doesn't get hard-hat notices; electrics always bring the wrench</em></li>
+    <li>Availability &amp; conflict awareness<em>recurring unavailability synced, time-aware conflict detection on export</em></li>
+  </ul>
+  <p class="lede" style="margin-top:30px">Shipped in one month of the pilot, solo, after hours: <span style="color:var(--paper)">15 features, 32 bug fixes, 2 performance improvements.</span></p>
+</div></section>
+
+<section class="arc"><div class="wrap">
+  <div class="eyebrow">The arc</div>
+  <h2>Built, shipped, operated, retired</h2>
+  <p>The Board began as an internal tool: a working dispatcher automating his own worst mornings. It grew into a 90-day paid pilot with his local — invoiced monthly, every invoice paid within a day.</p>
+  <p>One person was the operator and the developer at the same time. That is the reason the fill rate was 95.8%. It is not the reason the pilot didn't continue.</p>
+  <p>The pitch called it <em>dispatch automation</em>. To the dispatch team — union members themselves — a tool that let one dispatcher do the work of several sounded like a tool that made the others unnecessary, and their union asked for a pause. That reading was fair, and the framing was wrong. The Board never dispatched anyone on its own; every offer went out because a dispatcher decided it should. It was <em>augmentation</em> — the same people, with the phone tree replaced by something faster — and it was never sold that way. Lesson taken.</p>
+  <p>The pilot term ended on schedule; the system ran unattended for two more months without a single dispatch error before it was deliberately wound down and its member data deleted.</p>
+  <p class="mono">The codebase remains — a working reference for calling-sheet generation, bundled SMS dispatch, and legacy-system sync — pending a general-use rebuild.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="prov">PROVENANCE — figures marked db-verified were read directly from the production database (2026-08-18 inspection). Pilot metrics come from the operating record and month-end reports sent to the client. The client is a real union local; it is unnamed here because naming rights are theirs.</div>
+  <div>The Board is a <a href="https://ghostlight.tech">Ghostlight</a> project by Vincent Keats — Vancouver, BC.</div>
+</div></footer>
+
+</body>
+</html>
