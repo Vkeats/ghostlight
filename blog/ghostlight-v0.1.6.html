@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghostlight v0.1.6: A Whole Run of Auditions — ghostlight.tech</title>
+    <meta name="description" content="Casting across a whole run of auditions: sessions over several dates, cloned sessions, recorded actor moves that tell the actor, and send-in from the room. Plus a first look at the prompt book, which is with invited testers only.">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostlight.tech/blog/ghostlight-v0.1.6.html">
+    <meta property="og:title" content="Ghostlight v0.1.6: A Whole Run of Auditions">
+    <meta property="og:description" content="Casting across a whole run of auditions: sessions over several dates, cloned sessions, recorded actor moves that tell the actor, and send-in from the room. Plus a first look at the prompt book, which is with invited testers only.">
+    <meta property="og:image" content="https://ghostlight.tech/assets/og-image.png">
+    <meta property="article:published_time" content="2026-11-07">
+    <meta property="article:author" content="Vincent Keats">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ghostlight v0.1.6: A Whole Run of Auditions">
+    <meta name="twitter:description" content="Casting across a whole run of auditions: sessions over several dates, cloned sessions, recorded actor moves that tell the actor, and send-in from the room. Plus a first look at the prompt book, which is with invited testers only.">
+    <meta name="twitter:image" content="https://ghostlight.tech/assets/og-image.png">
+
+    <link rel="canonical" href="https://ghostlight.tech/blog/ghostlight-v0.1.6.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../main.js" defer></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1 class="logo logo--stacked">
+            <a href="../" style="text-decoration: none; color: inherit;">
+                <span class="logo__line logo__line--top">
+                    <span class="logo__text--ghost">gh<button class="theme-toggle" type="button" aria-label="Toggle light/dark theme"><svg class="theme-toggle__ghost" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-5.5 0-10 4.5-10 10v10c0 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 4 2 4 2V14c0-5.5-4.5-10-10-10z" fill="currentColor"/><circle cx="12" cy="12" r="2" class="theme-toggle__eye"/><circle cx="20" cy="12" r="2" class="theme-toggle__eye"/></svg></button>st</span>
+                </span>
+                <span class="logo__line logo__line--bottom">
+                    <span class="logo__text--light">light</span>
+                </span>
+            </a>
+        </h1>
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="../#ghostlight">Ghostlight</a>
+            <a href="../#board">Board</a>
+            <a href="../#about">About</a>
+            <a href="./">Blog</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <a href="./" class="blog-post__back">← Back to blog</a>
+            <div class="blog-post__meta">
+                <span>Nov 7, 2026</span>
+                <span>4 min read</span>
+            </div>
+            <h1 class="blog-post__title">Ghostlight v0.1.6: A Whole Run of Auditions</h1>
+
+            <div class="blog-post__content">
+                <p>v0.1.5 was about getting through a single audition day. v0.1.6 is about the calendar around it: calls that run across several dates, sessions you'd rather copy than rebuild, and actors who get moved and actually hear about it. In the room, you can send the next person in from where you're sitting and see who's running late. At the end there's a short note on something a few invited testers are trying that isn't open yet.</p>
+
+                <h2>What this is</h2>
+
+                <p>Ghostlight is casting and audition management for theatre companies, in preview.</p>
+
+                <h2>Scheduling across a whole run of auditions</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Calendars, not single days</h3>
+                    <ul>
+                        <li>Create sessions across several dates in one go, duplicate a session, or clone one to a new date, optionally keeping the actors already booked</li>
+                        <li>Move one actor to a different time as a recorded move instead of a remove-and-rebook, and when someone is taken out of a slot, they're told</li>
+                        <li>Change a session's start time and the actors already assigned keep their times</li>
+                        <li>The reschedule badge clears once the actor is re-slotted, and a "Needs rescheduling" filter shows who's still waiting</li>
+                        <li>A session invite that fails to send is now visible and can be retried, and the default invite says "audition" or "callback" depending on which it is</li>
+                    </ul>
+                </div>
+
+                <h2>In the room</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Decisions where you make them</h3>
+                    <ul>
+                        <li>Send the next actor in from the room, with day-of naming and a Late ETA for someone who's running behind</li>
+                        <li>Mark callback candidates in the room; they carry through to Submissions and the shortlist filters</li>
+                        <li>"Mark not done" on the call sheet for when NEXT got pressed too early, and NEXT always follows the running order</li>
+                        <li>Show submissions now require a role pick, and invitations send the sides for the roles the actor picked</li>
+                        <li>Archive a finished production so the list stays workable</li>
+                    </ul>
+                </div>
+
+                <h2>Quieter, clearer</h2>
+
+                <div class="blog-post__highlight">
+                    <h3>Small things you notice every day</h3>
+                    <ul>
+                        <li>A small toast confirms what you just did, so you're not left wondering whether it saved</li>
+                        <li>Calmer navigation, a more readable amber for text, one consistent focus outline, and touch targets you can actually hit on a phone</li>
+                        <li>Actor bios render Markdown, with a preview and formatting tips</li>
+                    </ul>
+                </div>
+
+                <p>There's also a batch of security and data-integrity fixes. I've fixed what I've found, and I keep looking. All told, about ninety distinct changes since v0.1.5.</p>
+
+                <h2>In testing: the prompt book</h2>
+
+                <p>Casting ends where rehearsal begins, so I've started building the next part: a prompt book, with blocking plotted on a floor plan of your actual set and tied to the script. It isn't live. A small group of invited testers have it while I find out what breaks, and it stays that way until it's ready.</p>
+
+                <div class="blog-post__highlight">
+                    <h3>Behind the curtain, for now</h3>
+                    <ul>
+                        <li>Import a scaled set drawing, trace it, and measure the stage the way a stage manager does</li>
+                        <li>Plot movement on the floor plan, exits included, with shape and paint tools</li>
+                        <li>Anchor each blocking moment to a script page and cue line</li>
+                        <li>A personal prompt book you own, separate from any company production</li>
+                    </ul>
+                </div>
+
+                <p>If you run rehearsals and want to try it, <a href="../#about">get in touch</a>.</p>
+
+                <h2>Why it matters</h2>
+
+                <p>Auditions rarely fit in one day. A call runs over a weekend, callbacks land the following week, and every move between them is a chance to lose an actor. v0.1.5 made a single day hold together; this release is about the days in between: the copies, the moves, and the "did they hear about the new time?" Most of the scheduler work here exists so the answer is yes without anyone having to check.</p>
+
+                <h2>What's next</h2>
+
+                <p>Preview deployments are moving onto their own database so preview links are safe to hand around, and payments wait on that. The prompt book stays with invited testers until it's something I'd trust in a real rehearsal room.</p>
+
+                <blockquote><p>The light stays on.</p></blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p class="footer__location">Vancouver, BC</p>
+        <nav class="footer__nav" aria-label="Social links">
+            <a href="https://github.com/Vkeats" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/vkeats" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/VinnyKeats" target="_blank" rel="noopener">X</a>
+        </nav>
+        <p class="footer__copyright">&copy; 2025 ghostlight</p>
+    </footer>
+
+</body>
+</html>
